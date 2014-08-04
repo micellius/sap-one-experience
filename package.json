@@ -1,0 +1,22 @@
+{
+  "name": "sap-one-experience",
+  "version": "0.0.1",
+  "description": "SAP One Experience",
+  "authors": [
+    "Vadim Tomnikov <micellius@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/micellius/sap-one-experience.git"
+  },
+  "private": true,
+  "dependencies": {
+    "body-parser": "~1.4.3",
+    "express": "~4.6.1",
+    "jade": "^1.4.2",
+    "morgan": "~1.1.1",
+    "serve-favicon": "~2.0.1",
+    "less-middleware": "~1.0.3"
+  },
+  "main": "app.js"
+}

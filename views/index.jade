@@ -1,0 +1,11 @@
+doctype html
+html(ng-app="sapIndex")
+    head
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(charset="UTF-8")
+        title(ng-init="siteName = '#{title}'")= title
+        - each stylesheet in stylesheets
+            link(type="text/css", rel="stylesheet", href=stylesheet)
+        - each javascript in javascripts
+            script(type="text/javascript", src=javascript)
+    body(ng-view) Loading...

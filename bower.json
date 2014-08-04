@@ -1,0 +1,22 @@
+{
+  "name": "sap-one-experience",
+  "version": "0.0.1",
+  "authors": [
+    "Vadim Tomnikov <micellius@gmail.com>"
+  ],
+  "description": "SAP One Experience",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "angular": "~1.2.21",
+    "angular-animate": "~1.2.21",
+    "angular-bootstrap": "~0.11.0",
+    "angular-resource": "~1.2.21",
+    "angular-route": "~1.2.21"
+  }
+}
