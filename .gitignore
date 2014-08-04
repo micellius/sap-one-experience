@@ -1,0 +1,15 @@
+# OS junk files
+**/[Tt]humbs.db
+**/.DS_Store
+
+# Bower components
+bower_components
+
+# Node dependencies
+node_modules
+
+# WebStorm files
+.idea
+
+# Generated CSS
+public/stylesheets/themes/*/*/
