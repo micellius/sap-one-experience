@@ -6,11 +6,14 @@ exports.get = function(req, res){
     var theme = req.context.theme;
 
     res.render('index', {
-        title: 'One Experience',
+        bootstrap: JSON.stringify({
+            title: 'SAP One Experience',
+            dir: 'ltr'
+        }),
         stylesheets: [
-            '/stylesheets/themes/' + theme + '/bootstrap.min.css',
+            '/stylesheets/themes/' + theme + '/css/bootstrap.min.css',
             '/stylesheets/themes/' + theme + '/index/login/login.css',
-            '/stylesheets/themes/' + theme + '/index/main/main.css',
+            '/stylesheets/themes/' + theme + '/index/main/main.css'
         ],
         javascripts: [
             // Libs
@@ -21,8 +24,11 @@ exports.get = function(req, res){
             '/angular-route/angular-route.min.js',
             // Custom
             '/javascripts/index/login/login-module.js',
+            '/javascripts/index/login/controllers/login-controller.js',
+            '/javascripts/index/login/services/login-service.js',
             '/javascripts/index/main/main-module.js',
-            '/javascripts/index/index-module.js',
+            '/javascripts/index/main/controllers/main-controller.js',
+            '/javascripts/index/index-module.js'
         ]
     });
 };

@@ -1,0 +1,224 @@
+@sap-branding-bar-height: 4px;
+@sap-logo-height: 26px;
+@sap-login-form-height: 250px;
+@sap-login-form-width: @screen-sm-min;
+
+@-webkit-keyframes login-bg {
+  0% {
+    -webkit-filter: brightness(100%);
+    -webkit-transform: scale(1.3);
+    opacity: 0.8;
+  }
+  70%, 100% {
+    -webkit-filter: brightness(50%);
+    -webkit-transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes login-header {
+  0% {
+    -webkit-transform: translate3d(0, -@navbar-height, 0);
+  }
+  70%, 100% {
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+}
+
+@-webkit-keyframes login-main-h1 {
+  0%, 30% {
+    -webkit-transform: translate3d(0, -@navbar-height, 0);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes login-main-form {
+  0%, 30% {
+    -webkit-transform: translate3d(0, @navbar-height, 0);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes login-footer {
+  0% {
+    -webkit-transform: translate3d(0, @navbar-height, 0);
+  }
+  70%, 100% {
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+}
+
+.sap-view.sap-route-login.ng-enter {
+  -webkit-animation: none 1.8s;
+  animation: none 1.8s;
+}
+
+.sap-view.sap-route-login.ng-enter.ng-enter-active {
+  .sap-login {
+    &:before {
+      -webkit-animation: login-bg 1.8s;
+    }
+  }
+  .sap-page-header {
+    -webkit-animation: login-header 1.8s;
+  }
+  .sap-page-main h1 {
+    -webkit-animation: login-main-h1 1.8s;
+  }
+  .sap-page-main form {
+    -webkit-animation: login-main-form 1.8s;
+  }
+  .sap-page-footer {
+    -webkit-animation: login-footer 1.8s;
+  }
+}
+
+.sap-view.sap-route-login.ng-leave {
+  -webkit-animation: none 1.8s;
+  animation: none 1.8s;
+}
+
+.sap-view.sap-route-login.ng-leave.ng-leave-active {
+  .sap-login {
+    &:before {
+      -webkit-animation: login-bg 1.8s;
+      -webkit-animation-direction: reverse;
+    }
+  }
+  .sap-page-header {
+    -webkit-animation: login-header 1.8s;
+    -webkit-animation-direction: reverse;
+  }
+  .sap-page-main h1 {
+    -webkit-animation: login-main-h1 1.8s;
+    -webkit-animation-direction: reverse;
+  }
+  .sap-page-main form {
+    -webkit-animation: login-main-form 1.8s;
+    -webkit-animation-direction: reverse;
+  }
+  .sap-page-footer {
+    -webkit-animation: login-footer 1.8s;
+    -webkit-animation-direction: reverse;
+  }
+}
+
+.sap-login {
+
+  position: absolute;
+  overflow: hidden;
+  top:  0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  &:before {
+    content: ' ';
+    position: absolute;
+    top:  0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-image: url('/images/index/login/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-filter: brightness(50%);
+  }
+
+  .sap-branding-bar {
+    margin: 0;
+    border: none;
+    background-color: @brand-primary;
+    height: @sap-branding-bar-height;
+    z-index: @zindex-navbar-fixed + 1;
+  }
+
+  .sap-page-header {
+    .navbar {
+      border-radius: 0;
+    }
+    .sap-logo {
+      margin-top: (@navbar-height - @sap-logo-height) / 2;
+      margin-right: (@navbar-height - @sap-logo-height) / 2;
+    }
+  }
+
+  .sap-page-main {
+    height: @sap-login-form-height;
+    min-width: @sap-login-form-width;
+    max-width: @sap-login-form-width;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: @sap-login-form-height / -2;
+    margin-left: @sap-login-form-width / -2;
+    @media (max-width: @screen-xs-min) {
+      min-width: 100%;
+      max-width: 100%;
+      margin-left: -50%;
+    }
+    @media (min-width: @screen-xs-min) and (max-width: @screen-sm-min) {
+      min-width: 90%;
+      max-width: 90%;
+      margin-left: -45%;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 0.75em;
+      color: @input-bg;
+      white-space: nowrap;
+      @media (max-width: @screen-md-min) {
+        font-size: 32px;
+      }
+      .sap-subtitle {
+        font-size: medium;
+      }
+    }
+    form {
+      max-width: 59em;
+      margin: 0 auto;
+      > div {
+        margin-bottom: 0.75em
+      }
+    }
+    .sap-remember-me {
+      color: @input-bg;
+      font-weight: normal;
+      margin-top: 0.45em;
+    }
+    .sap-forgot-password {
+      display: inline-block;
+      margin: 0.5em 0 0 0;
+      color: @input-bg;
+    }
+  }
+
+  .sap-page-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: @navbar-default-bg;
+    min-height: @navbar-height;
+    line-height: @navbar-height;
+    color: @navbar-default-color;
+    text-align: center;
+    font-style: italic;
+    font-size: @font-size-h4;
+    @media (max-width: @screen-xs-min) {
+      font-size: @font-size-h5;
+    }
+  }
+
+}

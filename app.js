@@ -17,7 +17,7 @@ app.set('themeRegExp', /\/themes\/([a-z]+)\//);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
-app.use(favicon(__dirname + '/public/images/favicon.png'));
+app.use(favicon(__dirname + '/public/images/shared/favicon.png'));
 app.use(morgan());
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
@@ -34,7 +34,7 @@ app.use(less(__dirname + '/public', {
             return pathname.replace(app.get('themeRegExp'), '/');
         },
         less: function (src, req) {
-            var variables = 'stylesheets/themes/' + req.context.theme + '/variables.less';
+            var variables = 'stylesheets/themes/' + req.context.theme + '/less/variables.less';
             return '@import "' + variables + '";\n' + src;
         }
     },

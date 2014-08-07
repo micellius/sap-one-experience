@@ -1,0 +1,14 @@
+<div class="sap-main">
+    <hr class="sap-branding-bar"/>
+    <header class="sap-page-header">
+        <nav class="navbar navbar-default" role="navigation">
+            <a class="navbar-brand" tabindex="-1"><i class="glyphicon glyphicon-th-list icon" ng-click="controller.toggleSideBar()"></i> {{msg.title}}</a>
+            <img src="images/shared/logo.png" alt="SAP" class="sap-logo pull-right"/>
+        </nav>
+    </header>
+    <aside class="sap-page-sidebar {{sidebarMode}}">
+        <ul class="list-group">
+            <li ng-class="{'list-group-item':true, 'active': currentPage === page}" ng-repeat="page in pages"><a href="#/{{page.name}}" class="sap-list-item-link"><i class="glyphicon glyphicon-{{page.icon}}"></i><span class="sap-list-item-text">{{page.title}}</span></a></li>
+        </ul>
+    </aside>
+</div>
