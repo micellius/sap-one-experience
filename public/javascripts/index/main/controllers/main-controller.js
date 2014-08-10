@@ -1,37 +1,16 @@
-angular.module('sapMain').controller('sapMainController', ['$scope', function($scope) {
+angular.module('sapMain').controller('sapMainController', [
+    '$scope', '$routeParams', 'sapMainPagesService', 'sapSharedI18nService',
+    function($scope, $routeParams, sapMainPagesService, sapSharedI18nService) {
 
-    $scope.msg = {
-        title: 'SAP One Experience'
-    };
+        $scope.msg = sapSharedI18nService.getMessages('main');
 
-    $scope.pages = [{
-        name: 'home',
-        title: 'Home',
-        icon: 'home'
-    }, {
-        name: 'apps',
-        title: 'Applications',
-        icon: 'th'
-    }, {
-        name: 'todos',
-        title: 'To-do\'s',
-        icon: 'check'
-    }, {
-        name: 'notifications',
-        title: 'Notifications',
-        icon: 'bell'
-    }, {
-        name: 'analytics',
-        title: 'Analytics',
-        icon: 'stats'
-    }, {
-        name: 'documents',
-        title: 'Documents',
-        icon: 'folder-open'
-    }];
+        $scope.pages = sapMainPagesService.getPages();
 
-    this.toggleSideBar = function() {
-        $scope.sidebarMode = ($scope.sidebarMode === 'toggle' ? '' : 'toggle');
-    };
+        $scope.currentPage = sapMainPagesService.getPageByName($routeParams.page) || sapMainPagesService.getDefaultPage();
 
-}]);
+        this.toggleSideBar = function() {
+            $scope.sidebarMode = ($scope.sidebarMode === 'toggle' ? '' : 'toggle');
+        };
+
+    }
+]);

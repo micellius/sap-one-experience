@@ -1,7 +1,7 @@
 /**
  * Created by i070970 on 8/3/14.
  */
-angular.module('sapLogin', ['ngRoute', 'ngAnimate']).
+angular.module('sapLogin', ['ngRoute', 'ngAnimate', 'sapShared']).
     config(['$routeProvider',
         function($routeProvider) {
             $routeProvider.

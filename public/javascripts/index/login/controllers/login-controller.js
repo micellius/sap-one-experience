@@ -1,19 +1,13 @@
 /**
  * Created by i070970 on 8/3/14.
  */
-angular.module('sapLogin').controller('sapLoginController', ['$scope', 'sapLoginService', function($scope, sapLoginService) {
-    $scope.msg = {
-        title: 'SAP One Experience',
-        subtitle: 'Grow — Simplify — Lead',
-        description: 'Build your working experience',
-        rememberMe: 'remember me',
-        forgotPassword: 'Forgot password',
-        login: 'Login',
-        username: 'User name',
-        password: 'Password'
-    };
+angular.module('sapLogin').controller('sapLoginController', [
+    '$scope', 'sapLoginService', 'sapSharedI18nService',
+    function($scope, sapLoginService, sapSharedI18nService) {
+        $scope.msg = sapSharedI18nService.getMessages('login');
 
-    this.login = function() {
-        sapLoginService.login($scope.username, $scope.password);
+        this.login = function() {
+            sapLoginService.login($scope.username, $scope.password);
+        }
     }
-}]);
+]);

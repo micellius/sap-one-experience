@@ -1,6 +1,9 @@
 @sap-branding-bar-height: 4px;
 @sap-logo-height: 26px;
+@sap-logo-margin: (@navbar-height - @sap-logo-height) / 2;
 @sap-sidebar-width: 200px;
+@sap-sidebar-collapsed-width: @panel-body-padding*2 + @font-size-base;
+@sap-content-top: @navbar-height + @sap-branding-bar-height + 2px;
 
 @-webkit-keyframes main-header {
   0% {
@@ -20,32 +23,84 @@
   }
 }
 
-.sap-view.sap-route-main.ng-enter {
+@-webkit-keyframes main-main {
+  0% {
+    opacity: 0;
+    top: 0;
+    left: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes main-main-internal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.sap-view.sap-to-route-main.ng-enter {
   -webkit-animation: none 1.2s;
   animation: none 1.2s;
 }
 
-.sap-view.sap-route-main.ng-enter.ng-enter-active {
+.sap-view.sap-to-route-main.ng-enter.ng-enter-active {
   .sap-page-header {
     -webkit-animation: main-header 1.2s;
   }
   .sap-page-sidebar {
     -webkit-animation: main-sidebar 1.2s;
   }
+  .sap-page-main {
+    -webkit-animation: main-main 1.2s;
+  }
 }
 
-.sap-view.sap-route-main.ng-leave {
+.sap-view.sap-to-route-main.ng-leave {
   -webkit-animation: none 1.2s;
   animation: none 1.2s;
 }
 
-.sap-view.sap-route-main.ng-leave.ng-leave-active {
+.sap-view.sap-to-route-main.ng-leave.ng-leave-active {
   .sap-page-header {
     -webkit-animation: main-header 1.2s;
     -webkit-animation-direction: reverse;
   }
   .sap-page-sidebar {
     -webkit-animation: main-sidebar 1.2s;
+    -webkit-animation-direction: reverse;
+  }
+  .sap-page-main {
+    -webkit-animation: main-main 1.2s;
+    -webkit-animation-direction: reverse;
+  }
+}
+
+.sap-view.sap-from-route-main.sap-to-route-main.ng-enter,
+.sap-view.sap-from-route-main.sap-to-route-main.ng-leave {
+  .sap-page-header {
+    -webkit-animation: none 0;
+  }
+  .sap-page-sidebar {
+    -webkit-animation: none 0;
+  }
+  .sap-page-main {
+    -webkit-animation: main-main-internal 1.2s;
+  }
+}
+
+.sap-view.sap-from-route-main.sap-to-route-main.ng-leave {
+  .sap-page-header {
+    visibility: hidden;
+  }
+  .sap-page-sidebar {
+    visibility: hidden;
+  }
+  .sap-page-main {
     -webkit-animation-direction: reverse;
   }
 }
@@ -72,14 +127,14 @@
       border-radius: 0;
     }
     .sap-logo {
-      margin-top: (@navbar-height - @sap-logo-height) / 2;
-      margin-right: (@navbar-height - @sap-logo-height) / 2;
+      margin-top: @sap-logo-margin;
+      margin-right: @sap-logo-margin;
     }
   }
 
   .sap-page-sidebar {
     position: absolute;
-    top: @navbar-height + @sap-branding-bar-height + 2px;
+    top: @sap-content-top;
     left: 0;
     bottom: 0;
     width: @sap-sidebar-width;
@@ -91,7 +146,7 @@
       width: 0;
     }
     @media (min-width: @screen-xs-min) and (max-width: @screen-sm-min) {
-      width: @panel-body-padding*2 + @font-size-base;
+      width: @sap-sidebar-collapsed-width;
       .list-group-item .sap-list-item-link .sap-list-item-text {
         opacity: 0;
       }
@@ -110,12 +165,18 @@
         opacity: 1;
         -webkit-transition: opacity 0.6s ease-in-out;
       }
+      &.active {
+        background-color: @list-group-active-bg;
+        .sap-list-item-link {
+          color: @list-group-active-color;
+        }
+      }
     }
   }
 
   .sap-page-sidebar.toggle {
     @media (min-width: @screen-sm-min) {
-      width: @panel-body-padding*2 + @font-size-base;
+      width: @sap-sidebar-collapsed-width;
       .list-group-item .sap-list-item-link .sap-list-item-text {
         opacity: 0;
       }
@@ -127,4 +188,32 @@
       width: @sap-sidebar-width;
     }
   }
+
+  .sap-page-main {
+    position: absolute;
+    top: @sap-content-top;
+    left: @sap-sidebar-width;
+    right: 0;
+    bottom: 0;
+    -webkit-transition: left 0.6s ease-in-out;
+    @media (max-width: @screen-xs-min) {
+      left: 0;
+    }
+    @media (min-width: @screen-xs-min) and (max-width: @screen-sm-min) {
+      left: @sap-sidebar-collapsed-width;
+    }
+  }
+
+  .sap-page-main.toggle {
+    @media (min-width: @screen-sm-min) {
+      left: @sap-sidebar-collapsed-width;
+    }
+    @media (min-width: @screen-xs-min) and (max-width: @screen-sm-min) {
+      left: 0;
+    }
+    @media (max-width: @screen-xs-min) {
+      left: @sap-sidebar-width;
+    }
+  }
+
 }

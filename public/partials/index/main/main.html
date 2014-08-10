@@ -3,12 +3,15 @@
     <header class="sap-page-header">
         <nav class="navbar navbar-default" role="navigation">
             <a class="navbar-brand" tabindex="-1"><i class="glyphicon glyphicon-th-list icon" ng-click="controller.toggleSideBar()"></i> {{msg.title}}</a>
-            <img src="images/shared/logo.png" alt="SAP" class="sap-logo pull-right"/>
+            <div class="pull-right">
+                <img src="images/shared/logo.png" alt="SAP" class="sap-logo pull-right"/>
+            </div>
         </nav>
     </header>
     <aside class="sap-page-sidebar {{sidebarMode}}">
         <ul class="list-group">
-            <li ng-class="{'list-group-item':true, 'active': currentPage === page}" ng-repeat="page in pages"><a href="#/{{page.name}}" class="sap-list-item-link"><i class="glyphicon glyphicon-{{page.icon}}"></i><span class="sap-list-item-text">{{page.title}}</span></a></li>
+            <li ng-class="{'list-group-item':true, 'active': currentPage === page}" ng-repeat="page in pages"><a href="#/main/{{page.name}}" class="sap-list-item-link"><i class="glyphicon glyphicon-{{page.icon}}"></i><span class="sap-list-item-text">{{page.title}}</span></a></li>
         </ul>
     </aside>
+    <main class="sap-page-main {{sidebarMode}}" ng-include="'partials/index/main/' + currentPage.name + '/' + currentPage.name + '.html'"></main>
 </div>

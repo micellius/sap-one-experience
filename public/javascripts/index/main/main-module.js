@@ -1,7 +1,7 @@
 /**
  * Created by i070970 on 8/3/14.
  */
-angular.module('sapMain', ['ngRoute']).
+angular.module('sapMain', ['ngRoute', 'sapShared']).
     config(['$routeProvider',
         function($routeProvider) {
             $routeProvider.
