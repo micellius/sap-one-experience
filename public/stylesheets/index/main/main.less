@@ -126,7 +126,36 @@
     .navbar {
       border-radius: 0;
     }
+    .sap-navbar-button {
+      display: inline-block;
+      vertical-align: top;
+      background: transparent;
+      color: @navbar-default-color;
+      border: none;
+      min-height: @navbar-height;
+      outline: none;
+      &:hover {
+        background: @navbar-default-link-active-bg;
+      }
+      &.sap-user-button {
+        padding-top: @navbar-height / 10;
+        padding-bottom: @navbar-height / 10;
+        .sap-user-image {
+          display: inline-block;
+          height: @navbar-height * 4 / 5;
+          margin-right: 0.5em;
+        }
+      }
+    }
+    .sap-separator {
+      display: inline-block;
+      vertical-align: top;
+      height: @navbar-height;
+      border-left: 1px solid @navbar-default-border;
+    }
     .sap-logo {
+      display: inline-block;
+      vertical-align: top;
       margin-top: @sap-logo-margin;
       margin-right: @sap-logo-margin;
     }
@@ -213,6 +242,55 @@
     }
     @media (max-width: @screen-xs-min) {
       left: @sap-sidebar-width;
+    }
+  }
+
+  .popover {
+    border-radius: 0;
+  }
+
+  .sap-user-popover {
+    display: block;
+    position: absolute;
+    top: @sap-content-top;
+    left: auto;
+    right: @sap-logo-margin;
+    width: 200px;
+    .dropdown {
+      margin-top: 0.5em;
+      .dropdown-menu {
+        cursor: pointer;
+      }
+    }
+    .popover-title {
+      cursor: pointer;
+    }
+  }
+
+  .sap-language-popover {
+    display: block;
+    position: absolute;
+    top: @sap-content-top;
+    left: auto;
+    right: @sap-logo-margin + @navbar-height*2.2;
+    width: 80px;
+    .popover-content {
+      padding: 0;
+      .list-group {
+        margin: 0;
+        color: inherit;
+        .list-group-item {
+          border: none;
+          border-radius: 0;
+          color: inherit;
+          background: transparent;
+          &:hover {
+            color: @navbar-default-link-hover-color;
+            background: @navbar-default-link-hover-bg;
+            cursor: pointer;
+          }
+        }
+      }
     }
   }
 

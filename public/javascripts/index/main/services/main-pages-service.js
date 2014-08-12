@@ -5,27 +5,21 @@ angular.module('sapMain').service('sapMainPagesService', [function() {
 
     var pages = [{
         name: 'home',
-        title: 'Home',
         icon: 'home'
     }, {
         name: 'apps',
-        title: 'Applications',
         icon: 'th'
     }, {
         name: 'todos',
-        title: 'To-do\'s',
         icon: 'check'
     }, {
         name: 'notifications',
-        title: 'Notifications',
         icon: 'bell'
     }, {
         name: 'analytics',
-        title: 'Analytics',
         icon: 'stats'
     }, {
         name: 'documents',
-        title: 'Documents',
         icon: 'folder-open'
     }];
 
