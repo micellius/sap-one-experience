@@ -29,9 +29,8 @@ exports.get = function(req, res){
             '/angular-route/angular-route.min.js',
             // Shared
             '/javascripts/shared/shared-module.js',
-            '/javascripts/shared/services/shared-user-service.js',
+            '/javascripts/shared/services/shared-authentication-service.js',
             '/javascripts/shared/services/shared-i18n-service.js',
-            '/javascripts/shared/services/shared-login-service.js',
             '/javascripts/shared/services/shared-theme-service.js',
             '/javascripts/shared/directives/shared-dropdown-directive.js',
             '/javascripts/shared/filters/shared-translate-filter.js',

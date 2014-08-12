@@ -1,7 +1,7 @@
 /**
  * Created by i070970 on 8/10/14.
  */
-angular.module('sapMain').directive('sapMainUserButtonDirective', ['sapSharedUserService', function(sapSharedUserService) {
+angular.module('sapMain').directive('sapMainUserButtonDirective', ['sapSharedAuthenticationService', function(sapSharedAuthenticationService) {
     return {
         template: '<button class="sap-navbar-button sap-user-button">' +
                       '<img ng-src="{{user.avatar}}" alt="{{user.firstName}} {{user.lastName}}" class="img-circle sap-user-image"/>' +
@@ -10,7 +10,7 @@ angular.module('sapMain').directive('sapMainUserButtonDirective', ['sapSharedUse
         replace: true,
         scope: true,
         link: function(scope) {
-            scope.user = sapSharedUserService.getUser();
+            scope.user = sapSharedAuthenticationService.getUser();
         }
     }
 }]);

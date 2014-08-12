@@ -2,7 +2,7 @@
  * Created by i070970 on 8/12/14.
  */
 angular.module('sapShared').service('sapSharedThemeService', [
-    '$location', '$http', '$window', $rootScope,
+    '$location', '$http', '$window', '$rootScope',
     function($location, $http, $window, $rootScope) {
 
         var themes = [];
@@ -43,7 +43,7 @@ angular.module('sapShared').service('sapSharedThemeService', [
             }
         };
 
-        this.getThemes = function() {
+        this.getTheme = function() {
             return $rootScope.theme;
         };
 

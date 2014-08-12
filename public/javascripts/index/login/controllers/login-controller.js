@@ -2,8 +2,8 @@
  * Created by i070970 on 8/3/14.
  */
 angular.module('sapLogin').controller('sapLoginController', [
-    '$scope', 'sapSharedLoginService', 'sapSharedI18nService',
-    function($scope, sapSharedLoginService, sapSharedI18nService) {
+    '$scope', 'sapSharedAuthenticationService', 'sapSharedI18nService',
+    function($scope, sapSharedAuthenticationService, sapSharedI18nService) {
 
         $scope.msg = sapSharedI18nService.getMessages();
 
@@ -12,7 +12,7 @@ angular.module('sapLogin').controller('sapLoginController', [
         });
 
         this.login = function() {
-            sapSharedLoginService.login($scope.username, $scope.password);
+            sapSharedAuthenticationService.login($scope.username, $scope.password);
         }
     }
 ]);

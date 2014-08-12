@@ -1,9 +1,9 @@
 angular.module('sapMain').controller('sapMainController', [
-    '$scope', '$routeParams', 'sapMainPagesService', 'sapSharedUserService', 'sapSharedI18nService', 'sapSharedLoginService', 'sapSharedThemeService',
-    function($scope, $routeParams, sapMainPagesService, sapSharedUserService, sapSharedI18nService, sapSharedLoginService, sapSharedThemeService) {
+    '$scope', '$routeParams', 'sapMainPagesService', 'sapSharedAuthenticationService', 'sapSharedI18nService', 'sapSharedThemeService',
+    function($scope, $routeParams, sapMainPagesService, sapSharedAuthenticationService, sapSharedI18nService, sapSharedThemeService) {
 
         $scope.msg = sapSharedI18nService.getMessages('main');
-        $scope.user = sapSharedUserService.getUser();
+        $scope.user = sapSharedAuthenticationService.getUser();
         $scope.pages = sapMainPagesService.getPages();
         $scope.currentPage = sapMainPagesService.getPageByName($routeParams.page) || sapMainPagesService.getDefaultPage();
         $scope.themes = sapSharedThemeService.getThemes();
@@ -28,7 +28,7 @@ angular.module('sapMain').controller('sapMainController', [
 
         this.logout = function() {
             $scope.isUserPopoverVisible = false;
-            sapSharedLoginService.logout();
+            sapSharedAuthenticationService.logout();
         }
 
     }

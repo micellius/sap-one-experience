@@ -2,8 +2,8 @@
  * Created by i070970 on 8/12/14.
  */
 angular.module('sapMain').directive('sapMainUserPopoverDirective', [
-    '$location', 'sapSharedUserService', 'sapSharedLoginService', 'sapSharedI18nService', 'sapSharedThemeService',
-    function($location, sapSharedUserService, sapSharedLoginService, sapSharedI18nService, sapSharedThemeService) {
+    '$location', 'sapSharedAuthenticationService', 'sapSharedI18nService', 'sapSharedThemeService',
+    function($location, sapSharedAuthenticationService, sapSharedI18nService, sapSharedThemeService) {
         return {
             template:
                 '<div class="popover bottom sap-user-popover">' +
@@ -23,8 +23,8 @@ angular.module('sapMain').directive('sapMainUserPopoverDirective', [
             replace: true,
             scope: true,
             link: function(scope) {
-                scope.user = sapSharedUserService.getUser();
-                scope.logout = sapSharedLoginService.logout;
+                scope.user = sapSharedAuthenticationService.getUser();
+                scope.logout = sapSharedAuthenticationService.logout;
                 scope.path = $location.path();
                 scope.setTheme = sapSharedThemeService.setTheme;
                 scope.msg = sapSharedI18nService.getMessages();
