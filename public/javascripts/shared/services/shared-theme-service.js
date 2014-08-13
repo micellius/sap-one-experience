@@ -43,6 +43,8 @@
                 } else {
                     $window.location.search = '?theme=' + theme;
                 }
+            } else {
+                $window.location.search = '?theme=' + theme;
             }
         };
 
