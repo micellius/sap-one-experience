@@ -13,3 +13,6 @@ node_modules
 
 # Generated CSS
 public/stylesheets/themes/*/*/*/
+
+# Build results
+dist

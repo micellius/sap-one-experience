@@ -1,40 +1,53 @@
 /**
  * Created by i070970 on 8/10/14.
  */
-angular.module('sapMain').service('sapMainPagesService', [function() {
+(function () {
+    'use strict';
 
-    var pages = [{
-        name: 'home',
-        icon: 'home'
-    }, {
-        name: 'apps',
-        icon: 'th'
-    }, {
-        name: 'todos',
-        icon: 'check'
-    }, {
-        name: 'notifications',
-        icon: 'bell'
-    }, {
-        name: 'analytics',
-        icon: 'stats'
-    }, {
-        name: 'documents',
-        icon: 'folder-open'
-    }];
+    function sapMainPagesService() {
 
-    this.getPages = function() {
-        return pages;
-    };
+        var pages;
 
-    this.getPageByName = function(pageName) {
-        return pages.filter(function(page) {
-            return page.name === pageName;
-        })[0];
-    };
+        pages = [{
+            name: 'home',
+            icon: 'home'
+        }, {
+            name: 'apps',
+            icon: 'th'
+        }, {
+            name: 'todos',
+            icon: 'check'
+        }, {
+            name: 'notifications',
+            icon: 'bell'
+        }, {
+            name: 'analytics',
+            icon: 'stats'
+        }, {
+            name: 'documents',
+            icon: 'folder-open'
+        }];
 
-    this.getDefaultPage = function() {
-        return pages[0];
-    };
+        this.getPages = function () {
+            return pages;
+        };
 
-}]);
+        this.getPageByName = function (pageName) {
+            return pages.filter(function (page) {
+                return page.name === pageName;
+            })[0];
+        };
+
+        this.getDefaultPage = function () {
+            return pages[0];
+        };
+
+    }
+
+    angular.
+        module('sapMain').
+        service('sapMainPagesService', [
+            sapMainPagesService
+        ]);
+
+}());

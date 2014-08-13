@@ -1,4 +1,10 @@
 /**
  * Created by i070970 on 8/3/14.
  */
-angular.module('sapHome', []);
+(function () {
+    'use strict';
+
+    angular.
+        module('sapHome', []);
+
+}());

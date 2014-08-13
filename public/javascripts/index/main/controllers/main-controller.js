@@ -1,35 +1,57 @@
-angular.module('sapMain').controller('sapMainController', [
-    '$scope', '$routeParams', 'sapMainPagesService', 'sapSharedAuthenticationService', 'sapSharedI18nService', 'sapSharedThemeService',
-    function($scope, $routeParams, sapMainPagesService, sapSharedAuthenticationService, sapSharedI18nService, sapSharedThemeService) {
+(function () {
+    'use strict';
+
+    function sapMainController(
+        $scope,
+        $routeParams,
+        sapMainPagesService,
+        sapSharedAuthenticationService,
+        sapSharedI18nService,
+        sapSharedThemeService
+    ) {
 
         $scope.msg = sapSharedI18nService.getMessages('main');
         $scope.user = sapSharedAuthenticationService.getUser();
         $scope.pages = sapMainPagesService.getPages();
-        $scope.currentPage = sapMainPagesService.getPageByName($routeParams.page) || sapMainPagesService.getDefaultPage();
+        $scope.currentPage = sapMainPagesService.getPageByName($routeParams.page) ||
+            sapMainPagesService.getDefaultPage();
         $scope.themes = sapSharedThemeService.getThemes();
         $scope.isUserPopoverVisible = false;
         $scope.isLanguagePopoverVisible = false;
 
-        $scope.$on('sapSharedI18nService.localeChanged', function() {
+        $scope.$on('sapSharedI18nService.localeChanged', function () {
             $scope.msg = sapSharedI18nService.getMessages('main');
         });
 
-        this.toggleSideBar = function() {
+        this.toggleSideBar = function () {
             $scope.sidebarMode = ($scope.sidebarMode === 'toggle' ? '' : 'toggle');
         };
 
-        this.toggleUserPopover = function() {
+        this.toggleUserPopover = function () {
             $scope.isUserPopoverVisible = !$scope.isUserPopoverVisible;
         };
 
-        this.toggleLanguagePopover = function() {
+        this.toggleLanguagePopover = function () {
             $scope.isLanguagePopoverVisible = !$scope.isLanguagePopoverVisible;
         };
 
-        this.logout = function() {
+        this.logout = function () {
             $scope.isUserPopoverVisible = false;
             sapSharedAuthenticationService.logout();
-        }
+        };
 
     }
-]);
+
+    angular.
+        module('sapMain').
+        controller('sapMainController', [
+            '$scope',
+            '$routeParams',
+            'sapMainPagesService',
+            'sapSharedAuthenticationService',
+            'sapSharedI18nService',
+            'sapSharedThemeService',
+            sapMainController
+        ]);
+
+}());

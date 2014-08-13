@@ -1,20 +1,36 @@
 /**
  * Created by i070970 on 8/11/14.
  */
-angular.module('sapShared').directive('sapSharedDropdownDirective', [function() {
-    return {
-        link: function(scope, element) {
-            var toggleElement,
+(function () {
+    'use strict';
+
+    function sapSharedDropdownDirective() {
+
+        /*jslint unparam: true */
+        function link(scope, element) {
+            var rootElement,
+                toggleElement,
                 menuElement,
                 isOpen;
 
-            toggleElement = angular.element(element[0].querySelector('.dropdown-toggle'));
-            menuElement = angular.element(element[0].querySelector('.dropdown-menu'));
+            rootElement = element[0];
+            toggleElement = angular.element(rootElement.querySelector('.dropdown-toggle'));
+            menuElement = angular.element(rootElement.querySelector('.dropdown-menu'));
             isOpen = false;
 
-            toggleElement.on('click', function() {
-                menuElement.css('display', (isOpen = !isOpen) ? 'block' : '');
+            toggleElement.on('click', function () {
+                isOpen = !isOpen;
+                menuElement.css('display', isOpen ? 'block' : '');
             });
         }
+
+        return {
+            link: link
+        };
     }
-}]);
+
+    angular.
+        module('sapShared').
+        directive('sapSharedDropdownDirective', sapSharedDropdownDirective);
+
+}());
