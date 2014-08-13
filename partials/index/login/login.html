@@ -1,0 +1,32 @@
+<div class="sap-login">
+    <hr class="sap-branding-bar"/>
+    <header class="sap-page-header">
+        <nav class="navbar navbar-default" role="navigation">
+            <a class="navbar-brand" href="#/" tabindex="-1">{{msg.title}}</a>
+            <img src="images/shared/logo.png" alt="SAP" class="sap-logo pull-right"/>
+        </nav>
+    </header>
+    <main class="sap-page-main">
+        <h1><span class="sap-title">{{msg.title}}</span> <span class="sap-title-divider hidden-xs">|</span> <span class="sap-subtitle hidden-xs">{{msg.subtitle}}</span></h1>
+        <form>
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="{{msg.username}}" tabindex="0" ng-model="username"/>
+            </div>
+            <div class="col-md-6">
+                <input type="password" class="form-control" placeholder="{{msg.password}}" tabindex="0" ng-model="password"/>
+            </div>
+            <div class="col-md-5 col-sm-6 col-xs-6">
+                <label class="sap-remember-me">
+                    <input type="checkbox" tabindex="-1"/> {{msg.rememberMe}}
+                </label>
+            </div>
+            <div class="col-md-5 col-sm-6 col-xs-6 text-right">
+                <a href="#/" tabindex="-1" class="sap-forgot-password">{{msg.forgotPassword}}</a>
+            </div>
+            <div class="col-md-2 col-sm-12 col-xs-12 text-right">
+                <button class="btn btn-primary col-xs-12" ng-click="controller.login()" tabindex="0">{{msg.login}}</button>
+            </div>
+        </form>
+    </main>
+    <footer class="sap-page-footer">{{msg.description}}</footer>
+</div>

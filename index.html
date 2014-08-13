@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
+<html ng-app="sapIndex" dir="{{dir}}">
+  <head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="UTF-8">
-    <title>SAP One Experience</title>
-</head>
-<body>
-    <h1>SAP One Experience</h1>
-</body>
+    <title>{{title}}</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/sap-one-experience-0.0.1.min.css">
+    <script type="text/javascript">window['sap-bootstrap'] = {"title":"SAP One Experience","dir":"ltr","locale":"en","theme":"default"};</script>
+    <script type="text/javascript" src="javascripts/angular.min.js"></script>
+    <script type="text/javascript" src="javascripts/angular-animate.min.js"></script>
+    <script type="text/javascript" src="javascripts/angular-route.min.js"></script>
+    <script type="text/javascript" src="javascripts/sap-one-experience-0.0.1.min.js"></script>
+  </head>
+  <body ng-view class="sap-view sap-from-route-{{fromRoute}} sap-to-route-{{toRoute}}">Loading...</body>
 </html>
