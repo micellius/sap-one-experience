@@ -8,6 +8,7 @@ var favicon = require('serve-favicon');
 var morgan  = require('morgan'); // Logger
 var bodyParser = require('body-parser');
 var locale = require('locale');
+var compress = require('compression');
 var supportedLanguages = ['en', 'ru'];
 var rtlLanguages = ['he'];
 var less = require('less-middleware');
@@ -23,6 +24,7 @@ app.set('view engine', 'jade');
 
 app.use(favicon(__dirname + '/public/images/shared/favicon.png'));
 app.use(morgan());
+app.use(compress());
 app.use(bodyParser.json());
 app.use(locale(supportedLanguages));
 app.use(function(req, res, next) {
