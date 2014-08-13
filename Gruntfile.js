@@ -17,13 +17,101 @@ module.exports = function(grunt) {
         closurecompiler: {
             minify: {
                 files: {
-                    'dist/sap-one-experience.min.js': [
-                        'public/javascripts/**/*.js'
+                    'dist/javascripts/<%= pkg.name %>-<%= pkg.version %>.min.js': [
+                        // Shared
+                        'public/javascripts/shared/shared-module.js',
+                        'public/javascripts/shared/**/shared-*.js',
+                        // Login
+                        'public/javascripts/index/login/login-module.js',
+                        'public/javascripts/index/login/**/login-*.js',
+                        // Main
+                        'public/javascripts/index/main/main-module.js',
+                        'public/javascripts/index/main/**/main-*.js',
+                        // Home
+                        'public/javascripts/index/main/home/home-module.js',
+                        'public/javascripts/index/main/home/**/home-*.js',
+                        // Index
+                        'public/javascripts/index/index-module.js'
                     ]
                 },
                 options: {
-                    'banner': '/* <%= pkg.name %> - <%= pkg.version %> */'
+                    'banner': '/* <%= pkg.name %>-<%= pkg.version %> */'
+                    //'compilation_level': 'ADVANCED_OPTIMIZATIONS',
+                    //'create_source_map': '<%= pkg.name %>-<%= pkg.version %>.min.js.map'
                 }
+            }
+        },
+        jade: {
+            compile: {
+                options: {
+                    pretty: true,
+                    data: {
+                        bootstrap: JSON.stringify({
+                            title: 'SAP One Experience',
+                            dir: 'ltr',
+                            locale: 'en',
+                            theme: 'default'
+                        }),
+                        stylesheets: [
+                            'stylesheets/<%= pkg.name %>-<%= pkg.version %>.min.css'
+                        ],
+                        javascripts: [
+                            'javascripts/angular.min.js',
+                            'javascripts/angular-animate.min.js',
+                            'javascripts/angular-route.min.js',
+                            'javascripts/<%= pkg.name %>-<%= pkg.version %>.min.js'
+                        ]
+                    }
+                },
+                files: {
+                    'dist/index.html': ['views/index.jade']
+                }
+            }
+        },
+        cssmin: {
+            combine: {
+                files: {
+                    'dist/stylesheets/<%= pkg.name %>-<%= pkg.version %>.min.css': [
+                        'public/stylesheets/themes/default/css/bootstrap.min.css',
+                        'public/stylesheets/themes/default/index/login/login.css',
+                        'public/stylesheets/themes/default/index/main/main.css',
+                        'public/stylesheets/themes/default/index/main/home/home.css'
+                    ]
+                }
+            }
+        },
+        copy: {
+            main: {
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    src: [
+                        'bower_components/angular/angular.min.js',
+                        'bower_components/angular/angular.min.js.map',
+                        'bower_components/angular-animate/angular-animate.min.js',
+                        'bower_components/angular-animate/angular-animate.min.js.map',
+                        'bower_components/angular-route/angular-route.min.js',
+                        'bower_components/angular-route/angular-route.min.js.map'
+                    ],
+                    dest: 'dist/javascripts/'
+                }, {
+                    expand: true,
+                    cwd: 'public/images/',
+                    src: ['**'],
+                    dest: 'dist/images/'
+                }, {
+                    expand: true,
+                    flatten: true,
+                    src: [
+                        'public/stylesheets/themes/default/fonts/*',
+                    ],
+                    dest: 'dist/fonts/'
+                }, {
+                    expand: true,
+                    cwd: 'public/partials/',
+                    src: ['**'],
+                    dest: 'dist/partials/'
+                }]
             }
         }
     });
@@ -31,7 +119,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-jslint');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-closurecompiler');
+    grunt.loadNpmTasks('grunt-contrib-jade');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['jslint', 'clean', 'closurecompiler']);
+    grunt.registerTask('default', ['jslint', 'clean', 'closurecompiler', 'jade', 'cssmin', 'copy']);
 
 };

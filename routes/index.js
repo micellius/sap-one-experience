@@ -24,8 +24,6 @@ exports.get = function(req, res){
             // Libs
             '/angular/angular.min.js',
             '/angular-animate/angular-animate.min.js',
-            '/angular-bootstrap/ui-bootstrap.min.js',
-            '/angular-resource/angular-resource.min.js',
             '/angular-route/angular-route.min.js',
             // Shared
             '/javascripts/shared/shared-module.js',
