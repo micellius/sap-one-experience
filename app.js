@@ -23,7 +23,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
 app.use(favicon(__dirname + '/public/images/shared/favicon.png'));
-app.use(morgan());
+app.use(morgan('combined'));
 app.use(compress());
 app.use(bodyParser.json());
 app.use(locale(supportedLanguages));
