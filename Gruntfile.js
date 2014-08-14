@@ -53,6 +53,7 @@ module.exports = function(grunt) {
                             theme: 'default'
                         }),
                         stylesheets: [
+                            'stylesheets/bootstrap.min.css',
                             'stylesheets/<%= pkg.name %>-<%= pkg.version %>.min.css'
                         ],
                         javascripts: [
@@ -72,7 +73,6 @@ module.exports = function(grunt) {
             combine: {
                 files: {
                     'dist/stylesheets/<%= pkg.name %>-<%= pkg.version %>.min.css': [
-                        'public/stylesheets/themes/default/css/bootstrap.min.css',
                         'public/stylesheets/themes/default/index/login/login.css',
                         'public/stylesheets/themes/default/index/main/main.css',
                         'public/stylesheets/themes/default/index/main/home/home.css'
@@ -96,9 +96,19 @@ module.exports = function(grunt) {
                     dest: 'dist/javascripts/'
                 }, {
                     expand: true,
+                    cwd: 'public/stylesheets/themes/default/css',
+                    src: ['**'],
+                    dest: 'dist/stylesheets/'
+                }, {
+                    expand: true,
                     cwd: 'public/images/',
                     src: ['**'],
                     dest: 'dist/images/'
+                }, {
+                    expand: true,
+                    cwd: 'public/images/shared/',
+                    src: ['favicon.png'],
+                    dest: 'dist/'
                 }, {
                     expand: true,
                     flatten: true,
@@ -113,6 +123,27 @@ module.exports = function(grunt) {
                     dest: 'dist/partials/'
                 }]
             }
+        },
+        'string-replace': {
+            dist: {
+                options: {
+                    replacements: [{
+                        pattern: /\(\/images\//gm,
+                        replacement: '(../images/'
+                    }]
+                },
+                files: {
+                    'dist/stylesheets/<%= pkg.name %>-<%= pkg.version %>.min.css': 'dist/stylesheets/<%= pkg.name %>-<%= pkg.version %>.min.css'
+                }
+            }
+        },
+        'file-creator': {
+            api: {
+                "dist/api/themes": function(fs, fd, done) {
+                    fs.writeSync(fd, '{"status":"OK","results":[]}');
+                    done();
+                }
+            }
         }
     });
 
@@ -122,7 +153,18 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jade');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-string-replace');
+    grunt.loadNpmTasks('grunt-file-creator');
 
-    grunt.registerTask('default', ['jslint', 'clean', 'closurecompiler', 'jade', 'cssmin', 'copy']);
+    grunt.registerTask('default', [
+        'jslint',
+        'clean',
+        'closurecompiler',
+        'jade',
+        'cssmin',
+        'copy',
+        'string-replace',
+        'file-creator'
+    ]);
 
 };

@@ -10,7 +10,7 @@
 
         $http({
             method: 'GET',
-            url: '/api/themes'
+            url: 'api/themes'
         }).success(function (data) {
             var i, l, results;
             results = data.results;

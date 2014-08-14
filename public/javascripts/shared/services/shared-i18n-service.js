@@ -51,6 +51,9 @@
 
             messageBundle = {
                 "en": {
+                    "": {
+                        "title": "SAP One Experience"
+                    },
                     "login": {
                         "title": "SAP One Experience",
                         "subtitle": "Grow — Simplify — Lead",
@@ -74,6 +77,9 @@
                     }
                 },
                 "ru": {
+                    "": {
+                        "title": "SAP One Experience"
+                    },
                     "login": {
                         "title": "SAP Единое рабочее пространство",
                         "subtitle": "Расти — Упрощать — Лидировать",

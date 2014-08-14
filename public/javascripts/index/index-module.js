@@ -4,7 +4,11 @@
 (function () {
     'use strict';
 
-    function config($provide, sapSharedI18nServiceProvider) {
+    function config($routeProvider, $provide, sapSharedI18nServiceProvider) {
+        $routeProvider.otherwise({
+            redirectTo: '/login'
+        });
+
         $provide.value('setDefaultBundle', sapSharedI18nServiceProvider.setDefaultBundle);
         $provide.value('setDefaultLocale', sapSharedI18nServiceProvider.setDefaultLocale);
     }
@@ -12,7 +16,7 @@
     function run($rootScope, $location, $window, sapSharedI18nService, setDefaultBundle, setDefaultLocale) {
         $rootScope.$on('$locationChangeStart', function () {
             $rootScope.fromRoute = $rootScope.toRoute;
-            $rootScope.toRoute = $location.path().split('/')[1];
+            $rootScope.toRoute = $location.path().split('/')[1] || '';
         });
 
         $rootScope.$on('sapSharedI18nService.localeChanged', function () {
@@ -24,7 +28,7 @@
         }
 
         setDefaultBundle(function () {
-            return $location.path().split('/')[1];
+            return $location.path().split('/')[1] || '';
         });
 
         setDefaultLocale($rootScope.locale || 'en');
@@ -34,7 +38,7 @@
 
     angular.
         module('sapIndex', ['sapLogin', 'sapMain']).
-        config(['$provide', 'sapSharedI18nServiceProvider', config]).
+        config(['$routeProvider', '$provide', 'sapSharedI18nServiceProvider', config]).
         run(['$rootScope', '$location', '$window', 'sapSharedI18nService', 'setDefaultBundle', 'setDefaultLocale', run]);
 
 }());
