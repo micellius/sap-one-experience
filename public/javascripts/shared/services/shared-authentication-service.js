@@ -4,38 +4,84 @@
 (function () {
     'use strict';
 
-    function sapSharedAuthenticationService($location) {
+    function sapSharedAuthenticationServiceProvider() {
 
-        var user = {
-            firstName: 'Vadim',
-            lastName: 'Tomnikov',
-            email: 'micellius@gmail.com',
-            avatar: 'images/shared/vadim.jpg'
+        var loginPath,
+            defaultPath;
+
+        this.setLoginPath = function(path) {
+            loginPath = path;
         };
 
-        this.setUser = function (newUser) {
-            user = newUser;
+        this.setDefaultPath = function(path) {
+            defaultPath = path;
         };
 
-        this.getUser = function () {
-            return user;
-        };
+        function sapSharedAuthenticationFactory($location, $http, sapSharedBootstrapService) {
 
-        this.login = function () {
-            $location.path('/main');
-        };
+            var bootstrappedUser,
+                user,
+                isAuth,
+                sapSharedAuthenticationService;
 
-        this.logout = function () {
-            $location.path('/login');
-        };
+            bootstrappedUser = sapSharedBootstrapService.get('user');
+            user = bootstrappedUser || {};
+            isAuth = !!bootstrappedUser;
+
+            function isAuthenticated() {
+                return isAuth;
+            }
+
+            function getUser() {
+                return user;
+            }
+
+            function login(username, password) {
+                $http.post('api/login', {
+                    username: username,
+                    password: password
+                }).success(function (data) {
+                    isAuth = true;
+                    angular.extend(user, data.results);
+                    $location.path(defaultPath);
+                });
+            }
+
+            function logout() {
+                var key;
+                $http.post('api/logout', {}).success(function() {
+                    for(key in user) {
+                        if(user.hasOwnProperty(key)) {
+                            delete user[key];
+                        }
+                    }
+                    isAuth = false;
+                    $location.path(loginPath);
+                });
+            }
+
+            sapSharedAuthenticationService = {
+                isAuthenticated: isAuthenticated,
+                getUser: getUser,
+                login: login,
+                logout: logout
+            };
+
+            return sapSharedAuthenticationService;
+
+        }
+
+        this.$get = [
+            '$location',
+            '$http',
+            'sapSharedBootstrapService',
+            sapSharedAuthenticationFactory
+        ];
 
     }
 
     angular.
         module('sapShared').
-        service('sapSharedAuthenticationService', [
-            '$location',
-            sapSharedAuthenticationService
-        ]);
+        provider('sapSharedAuthenticationService', sapSharedAuthenticationServiceProvider);
 
 }());

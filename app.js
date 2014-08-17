@@ -8,11 +8,13 @@ var favicon = require('serve-favicon');
 var morgan  = require('morgan'); // Logger
 var bodyParser = require('body-parser');
 var locale = require('locale');
+var session = require('express-session');
 var compress = require('compression');
 var supportedLanguages = ['en', 'ru'];
 var rtlLanguages = ['he'];
 var less = require('less-middleware');
 var index = require('./routes/index.js');
+var authenticationService = require('./services/authentication.js');
 var themeService = require('./services/theme.js');
 var app = express();
 
@@ -27,12 +29,18 @@ app.use(morgan('combined'));
 app.use(compress());
 app.use(bodyParser.json());
 app.use(locale(supportedLanguages));
+app.use(session({
+    secret: 'sap-one-experience',
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(function(req, res, next) {
     // Set request context
     req.context = {
         theme: req.query.theme || (app.get('themeRegExp').exec(req.url) || [])[1] || 'default',
-        locale: req.query.locale && supportedLanguages.indexOf(req.query.locale) >=0 ? req.query.locale : req.locale,
-        dir: rtlLanguages.indexOf(req.locale) >=0 ? 'rtl' : 'ltr'
+        locale: req.query.locale && supportedLanguages.indexOf(req.query.locale) >= 0 ? req.query.locale : req.locale,
+        dir: rtlLanguages.indexOf(req.locale) >= 0 ? 'rtl' : 'ltr',
+        user: req.session.user || null
     };
     next();
 });
@@ -59,6 +67,8 @@ app.get('/', index.get);
 
 // Services
 app.get('/api/themes', themeService.getThemes);
+app.post('/api/login', authenticationService.login);
+app.post('/api/logout', authenticationService.logout);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));

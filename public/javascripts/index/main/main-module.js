@@ -4,6 +4,8 @@
 (function () {
     'use strict';
 
+    var SAP_MAIN_PATH = '/main';
+
     function config($routeProvider) {
         $routeProvider.
             when('/main/:page?', {
@@ -15,6 +17,7 @@
 
     angular.
         module('sapMain', ['ngRoute', 'sapShared']).
+        constant('SAP_MAIN_PATH', SAP_MAIN_PATH).
         config(['$routeProvider', config]);
 
 }());

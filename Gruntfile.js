@@ -30,6 +30,9 @@ module.exports = function(grunt) {
                         // Home
                         'public/javascripts/index/main/home/home-module.js',
                         'public/javascripts/index/main/home/**/home-*.js',
+                        // Home
+                        'public/javascripts/index/main/home/apps-module.js',
+                        'public/javascripts/index/main/home/**/apps-*.js',
                         // Index
                         'public/javascripts/index/index-module.js'
                     ]

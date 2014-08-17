@@ -4,16 +4,15 @@
 (function () {
     'use strict';
 
-    function config($routeProvider, $provide, sapSharedI18nServiceProvider) {
-        $routeProvider.otherwise({
-            redirectTo: '/login'
-        });
+    function config($provide, sapSharedAuthenticationServiceProvider, sapSharedI18nServiceProvider, SAP_LOGIN_PATH, SAP_MAIN_PATH) {
+        sapSharedAuthenticationServiceProvider.setLoginPath(SAP_LOGIN_PATH);
+        sapSharedAuthenticationServiceProvider.setDefaultPath(SAP_MAIN_PATH);
 
         $provide.value('setDefaultBundle', sapSharedI18nServiceProvider.setDefaultBundle);
         $provide.value('setDefaultLocale', sapSharedI18nServiceProvider.setDefaultLocale);
     }
 
-    function run($rootScope, $location, $window, sapSharedI18nService, setDefaultBundle, setDefaultLocale) {
+    function run($rootScope, $location, sapSharedI18nService, setDefaultBundle, setDefaultLocale) {
         $rootScope.$on('$locationChangeStart', function () {
             $rootScope.fromRoute = $rootScope.toRoute;
             $rootScope.toRoute = $location.path().split('/')[1] || '';
@@ -22,10 +21,6 @@
         $rootScope.$on('sapSharedI18nService.localeChanged', function () {
             $rootScope.title = sapSharedI18nService.translate('title');
         });
-
-        if ($window['sap-bootstrap']) {
-            angular.extend($rootScope, $window['sap-bootstrap']);
-        }
 
         setDefaultBundle(function () {
             return $location.path().split('/')[1] || '';
@@ -38,7 +33,21 @@
 
     angular.
         module('sapIndex', ['sapLogin', 'sapMain']).
-        config(['$routeProvider', '$provide', 'sapSharedI18nServiceProvider', config]).
-        run(['$rootScope', '$location', '$window', 'sapSharedI18nService', 'setDefaultBundle', 'setDefaultLocale', run]);
+        config([
+            '$provide',
+            'sapSharedAuthenticationServiceProvider',
+            'sapSharedI18nServiceProvider',
+            'SAP_LOGIN_PATH',
+            'SAP_MAIN_PATH',
+            config
+        ]).
+        run([
+            '$rootScope',
+            '$location',
+            'sapSharedI18nService',
+            'setDefaultBundle',
+            'setDefaultLocale',
+            run
+        ]);
 
 }());
