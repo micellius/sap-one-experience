@@ -9,11 +9,11 @@
         var loginPath,
             defaultPath;
 
-        this.setLoginPath = function(path) {
+        this.setLoginPath = function (path) {
             loginPath = path;
         };
 
-        this.setDefaultPath = function(path) {
+        this.setDefaultPath = function (path) {
             defaultPath = path;
         };
 
@@ -48,10 +48,10 @@
             }
 
             function logout() {
-                var key;
-                $http.post('api/logout', {}).success(function() {
-                    for(key in user) {
-                        if(user.hasOwnProperty(key)) {
+                $http.post('api/logout', {}).success(function () {
+                    var key;
+                    for (key in user) {
+                        if (user.hasOwnProperty(key)) {
                             delete user[key];
                         }
                     }

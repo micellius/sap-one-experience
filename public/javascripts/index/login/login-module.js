@@ -16,8 +16,8 @@
     }
 
     function run($rootScope, $location, sapSharedAuthenticationService) {
-        $rootScope.$on('$locationChangeStart', function(event) {
-            if($location.path() !== SAP_LOGIN_PATH && !sapSharedAuthenticationService.isAuthenticated()) {
+        $rootScope.$on('$locationChangeStart', function () {
+            if ($location.path() !== SAP_LOGIN_PATH && !sapSharedAuthenticationService.isAuthenticated()) {
                 $location.path(SAP_LOGIN_PATH);
             }
         });

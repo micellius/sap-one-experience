@@ -10,9 +10,9 @@
             angular.extend($rootScope, $window['sap-bootstrap']);
         }
 
-        this.get = function(key) {
+        this.get = function (key) {
             return $rootScope[key];
-        }
+        };
     }
 
     angular.
