@@ -116,7 +116,7 @@ module.exports = function(grunt) {
                     expand: true,
                     flatten: true,
                     src: [
-                        'public/stylesheets/themes/default/fonts/*',
+                        'public/stylesheets/themes/default/fonts/*'
                     ],
                     dest: 'dist/fonts/'
                 }, {
@@ -143,8 +143,16 @@ module.exports = function(grunt) {
         'file-creator': {
             api: {
                 "dist/api/themes": function(fs, fd, done) {
-                    fs.writeSync(fd, '{"status":"OK","results":[]}');
-                    done();
+                    var data = '{"status":"OK","results":[]}';
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
+                },
+                "dist/api/login": function(fs, fd, done) {
+                    var data = '{"status":"OK","results":{"firstName":"Vadim","lastName":"Tomnikov","email":"micellius@gmail.com","avatar":"images/shared/vadim.jpg"}}';
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
+                },
+                "dist/api/logout": function(fs, fd, done) {
+                    var data = '{"status":"OK"}';
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 }
             }
         }
