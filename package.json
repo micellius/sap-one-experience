@@ -22,7 +22,9 @@
     "less-middleware": "~1.0.3",
     "locale": "~0.0.17",
     "morgan": "~1.2.3",
-    "serve-favicon": "~2.0.1"
+    "request": "~2.40.0",
+    "serve-favicon": "~2.0.1",
+    "stdio": "~0.2.2"
   },
   "devDependencies": {
     "grunt-closurecompiler": "~0.9.9",

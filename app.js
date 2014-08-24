@@ -17,10 +17,17 @@ var index = require('./routes/index.js');
 var authenticationService = require('./services/authentication.js');
 var themeService = require('./services/theme.js');
 var app = express();
+var stdio = require('stdio');
+var opts = stdio.getopt({
+    'proxy': { args: 1, description: 'Proxy server URL (e.g. http://proxy:1234)' },
+    'site': { args: 1, description: 'HANA Cloud Portal site JSON URL (e.g. http://www.my-site.com:1234/portal/v1/sites/1919e4a3-9322-4cbd-bbae-8f291b49eceb)' }
+});
+var homeService = require('./services/home.js')(opts);
+
 
 app.set('port', 3000);
 app.set('dev', true);
-app.set('themeRegExp', /\/themes\/([a-z]+)\//);
+app.set('themeRegExp', new RegExp('\\' + path.sep + 'themes\\' + path.sep + '([a-z]+)\\' + path.sep));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
@@ -44,11 +51,11 @@ app.use(function(req, res, next) {
     };
     next();
 });
-app.use(less(__dirname + '/public', {
+app.use(less(path.join(__dirname, 'public'), {
     force: app.get('dev'),
     preprocess: {
         path: function (pathname, req) {
-            return pathname.replace(app.get('themeRegExp'), '/');
+            return pathname.replace(app.get('themeRegExp'), path.sep);
         },
         less: function (src, req) {
             var variables = 'stylesheets/themes/' + req.context.theme + '/less/variables.less';
@@ -69,6 +76,7 @@ app.get('/', index.get);
 app.get('/api/themes', themeService.getThemes);
 app.post('/api/login', authenticationService.login);
 app.post('/api/logout', authenticationService.logout);
+app.get('/api/home', homeService.getHome);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
