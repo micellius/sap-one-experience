@@ -16,7 +16,13 @@
     }
 
     angular.
-        module('sapMain', ['ngRoute', 'sapShared']).
+        module('sapMain', [
+            'ngRoute',
+            'sapShared',
+            'sapHome',
+            'sapApps',
+            'sapTodos'
+        ]).
         constant('SAP_MAIN_PATH', SAP_MAIN_PATH).
         config(['$routeProvider', config]);
 

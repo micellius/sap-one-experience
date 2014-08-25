@@ -24,15 +24,27 @@ module.exports = function(grunt) {
                         // Login
                         'public/javascripts/index/login/login-module.js',
                         'public/javascripts/index/login/**/login-*.js',
-                        // Main
-                        'public/javascripts/index/main/main-module.js',
-                        'public/javascripts/index/main/**/main-*.js',
                         // Home
                         'public/javascripts/index/main/home/home-module.js',
                         'public/javascripts/index/main/home/**/home-*.js',
-                        // Home
-                        'public/javascripts/index/main/home/apps-module.js',
-                        'public/javascripts/index/main/home/**/apps-*.js',
+                        // Apps
+                        'public/javascripts/index/main/apps/apps-module.js',
+                        'public/javascripts/index/main/apps/**/apps-*.js',
+                        // Todos
+                        'public/javascripts/index/main/todos/todos-module.js',
+                        'public/javascripts/index/main/todos/**/todos-*.js',
+                        // Notifications
+                        'public/javascripts/index/main/notifications/notifications-module.js',
+                        'public/javascripts/index/main/notifications/**/notifications-*.js',
+                        // Analytics
+                        'public/javascripts/index/main/analytics/analytics-module.js',
+                        'public/javascripts/index/main/analytics/**/analytics-*.js',
+                        // Documents
+                        'public/javascripts/index/main/documents/documents-module.js',
+                        'public/javascripts/index/main/documents/**/documents-*.js',
+                        // Main
+                        'public/javascripts/index/main/main-module.js',
+                        'public/javascripts/index/main/**/main-*.js',
                         // Index
                         'public/javascripts/index/index-module.js'
                     ]

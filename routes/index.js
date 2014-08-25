@@ -40,6 +40,24 @@ exports.get = function(req, res){
             // Login
             '/javascripts/index/login/login-module.js',
             '/javascripts/index/login/controllers/login-controller.js',
+            // Home
+            '/javascripts/index/main/home/home-module.js',
+            '/javascripts/index/main/home/controllers/home-controller.js',
+            // Apps
+            '/javascripts/index/main/apps/apps-module.js',
+            '/javascripts/index/main/apps/controllers/apps-controller.js',
+            // Todos
+            '/javascripts/index/main/todos/todos-module.js',
+            '/javascripts/index/main/todos/controllers/todos-controller.js',
+            // Notifications
+            '/javascripts/index/main/notifications/notifications-module.js',
+            '/javascripts/index/main/notifications/controllers/notifications-controller.js',
+            // Analytics
+            '/javascripts/index/main/analytics/analytics-module.js',
+            '/javascripts/index/main/analytics/controllers/analytics-controller.js',
+            // Documents
+            '/javascripts/index/main/documents/documents-module.js',
+            '/javascripts/index/main/documents/controllers/documents-controller.js',
             // Main
             '/javascripts/index/main/main-module.js',
             '/javascripts/index/main/controllers/main-controller.js',
@@ -50,10 +68,6 @@ exports.get = function(req, res){
             '/javascripts/index/main/directives/main-language-popover-directive.js',
             '/javascripts/index/main/directives/main-gallery-button-directive.js',
             '/javascripts/index/main/directives/main-gallery-popover-directive.js',
-            // Home
-            '/javascripts/index/main/home/home-module.js',
-            // Apps
-            '/javascripts/index/main/apps/apps-module.js',
             // Index
             '/javascripts/index/index-module.js'
         ]
