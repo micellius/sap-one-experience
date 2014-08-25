@@ -9,14 +9,14 @@
 
         var items = [];
 
-        this.setItems = function(collection) {
+        this.setItems = function (collection) {
             items.length = 0;
-            Array.prototype.forEach.call(collection, function(item) {
+            Array.prototype.forEach.call(collection, function (item) {
                 items.push(item);
             });
         };
 
-        this.getItems = function() {
+        this.getItems = function () {
             return items;
         };
     }

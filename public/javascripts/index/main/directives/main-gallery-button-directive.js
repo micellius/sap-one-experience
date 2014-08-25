@@ -11,9 +11,7 @@
                     '<span class="glyphicon glyphicon-th"></span>' +
                 '</button>',
             replace: true,
-            scope: true,
-            link: function (scope) {
-            }
+            scope: true
         };
     }
 
