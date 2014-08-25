@@ -34,6 +34,7 @@ exports.get = function(req, res){
             '/javascripts/shared/services/shared-authentication-service.js',
             '/javascripts/shared/services/shared-i18n-service.js',
             '/javascripts/shared/services/shared-theme-service.js',
+            '/javascripts/shared/services/shared-gallery-service.js',
             '/javascripts/shared/directives/shared-dropdown-directive.js',
             '/javascripts/shared/filters/shared-translate-filter.js',
             // Login
@@ -47,6 +48,8 @@ exports.get = function(req, res){
             '/javascripts/index/main/directives/main-user-popover-directive.js',
             '/javascripts/index/main/directives/main-language-button-directive.js',
             '/javascripts/index/main/directives/main-language-popover-directive.js',
+            '/javascripts/index/main/directives/main-gallery-button-directive.js',
+            '/javascripts/index/main/directives/main-gallery-popover-directive.js',
             // Home
             '/javascripts/index/main/home/home-module.js',
             // Apps
