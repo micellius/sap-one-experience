@@ -153,6 +153,17 @@ module.exports = function(grunt) {
                 "dist/api/logout": function(fs, fd, done) {
                     var data = '{"status":"OK"}';
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
+                },
+                "dist/api/home/widgets": function(fs, fd, done) {
+                    var data = '{"status":"OK","results":[{"widgetId":"wid","documentId":"did","contentType":"text/plain","name":"Text Widget"}]}';
+                    fs.mkdirSync("dist/api/home/widget");
+                    fs.mkdirSync("dist/api/home/widget/wid");
+                    fs.mkdirSync("dist/api/home/widget/wid/document");
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
+                },
+                "dist/api/home/widget/wid/document/did": function(fs, fd, done) {
+                    var data = 'Hello!';
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 }
             }
         }
