@@ -29,3 +29,5 @@ There are two options of how to run the project:
   * Copy contents of the `dist` folder to the path that may be served by web server
   * Open Chrome and enter host, port and path to `index.html` on the server
 
+There is also a standalone version available on [http://micellius.github.io/sap-one-experience](http://micellius.github.io/sap-one-experience)
+
