@@ -76,7 +76,8 @@
                         "logout": "Logout",
                         "languageSwitch": "Language",
                         "userProfile": "User profile",
-                        "gallerySwitch": "Galley"
+                        "gallerySwitch": "Galley",
+                        "notificationsSwitch": "Notifications"
                     }
                 },
                 "ru": {
@@ -98,14 +99,15 @@
                         "home": "Домашняя страница",
                         "apps": "Приложения",
                         "todos": "Задания",
-                        "notifications": "Оповещения",
+                        "notifications": "Уведомления",
                         "analytics": "Аналитика",
                         "documents": "Документы",
                         "theme": "Тема",
                         "logout": "Выйти",
                         "languageSwitch": "Язык",
                         "userProfile": "Профиль пользователя",
-                        "gallerySwitch": "Галлерея"
+                        "gallerySwitch": "Галлерея",
+                        "notificationsSwitch": "Уведомления"
                     }
                 }
             };

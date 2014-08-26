@@ -10,7 +10,6 @@ exports.get = function(req, res){
 
     res.render('index', {
         bootstrap: JSON.stringify({
-            title: 'SAP One Experience',
             dir: dir,
             locale: locale,
             theme: theme,
@@ -35,6 +34,7 @@ exports.get = function(req, res){
             '/javascripts/shared/services/shared-i18n-service.js',
             '/javascripts/shared/services/shared-theme-service.js',
             '/javascripts/shared/services/shared-gallery-service.js',
+            '/javascripts/shared/services/shared-notifications-service.js',
             '/javascripts/shared/directives/shared-dropdown-directive.js',
             '/javascripts/shared/filters/shared-translate-filter.js',
             // Login
@@ -69,6 +69,8 @@ exports.get = function(req, res){
             '/javascripts/index/main/directives/main-language-popover-directive.js',
             '/javascripts/index/main/directives/main-gallery-button-directive.js',
             '/javascripts/index/main/directives/main-gallery-popover-directive.js',
+            '/javascripts/index/main/directives/main-notifications-button-directive.js',
+            '/javascripts/index/main/directives/main-notifications-popover-directive.js',
             // Index
             '/javascripts/index/index-module.js'
         ]

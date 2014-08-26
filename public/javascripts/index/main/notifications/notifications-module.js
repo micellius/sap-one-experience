@@ -5,6 +5,15 @@
     'use strict';
 
     angular.
-        module('sapNotifications', ['sapShared']);
+        module('sapNotifications', ['sapShared']).
+        run(['sapSharedNotificationsService', function (sapSharedNotificationsService) {
+            sapSharedNotificationsService.setItems([{
+                title: 'Notification 1',
+                subtitle: 'Notification 1'
+            }, {
+                title: 'Notification 2',
+                subtitle: 'Notification 2'
+            }]);
+        }]);
 
 }());

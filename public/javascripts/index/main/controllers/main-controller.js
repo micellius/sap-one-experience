@@ -40,8 +40,11 @@
             $scope.isGalleryPopoverVisible = !$scope.isGalleryPopoverVisible;
         };
 
+        this.toggleNotificationsPopover = function () {
+            $scope.isNotificationsPopoverVisible = !$scope.isNotificationsPopoverVisible;
+        };
+
         this.logout = function () {
-            $scope.isUserPopoverVisible = false;
             sapSharedAuthenticationService.logout();
         };
 

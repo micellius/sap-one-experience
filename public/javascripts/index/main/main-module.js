@@ -21,7 +21,10 @@
             'sapShared',
             'sapHome',
             'sapApps',
-            'sapTodos'
+            'sapTodos',
+            'sapNotifications',
+            'sapAnalytics',
+            'sapDocuments'
         ]).
         constant('SAP_MAIN_PATH', SAP_MAIN_PATH).
         config(['$routeProvider', config]);
