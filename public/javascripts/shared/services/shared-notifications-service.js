@@ -5,7 +5,7 @@
     'use strict';
 
 
-    function sapSharedNotificationsService($rootScope) {
+    function sapSharedNotificationsService() {
 
         var items = [];
 
@@ -24,7 +24,6 @@
     angular.
         module('sapShared').
         service('sapSharedNotificationsService', [
-            '$rootScope',
             sapSharedNotificationsService
         ]);
 
