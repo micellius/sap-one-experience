@@ -19,14 +19,16 @@ var themeService = require('./services/theme.js');
 var app = express();
 var stdio = require('stdio');
 var opts = stdio.getopt({
+    'dev': { description: 'Enable development mode' },
+    'port': { args: 1, description: 'Port to be used by Express (e.g. 3000)' },
     'proxy': { args: 1, description: 'Proxy server URL (e.g. http://proxy:1234)' },
     'site': { args: 1, description: 'HANA Cloud Portal site JSON URL (e.g. http://www.my-site.com:1234/portal/v1/sites/1919e4a3-9322-4cbd-bbae-8f291b49eceb)' }
 });
 var homeService = require('./services/home.js')(opts);
 
 
-app.set('port', 3000);
-app.set('dev', true);
+app.set('port', opts.port || 3000);
+app.set('dev', opts.dev || false);
 app.set('themeRegExp', new RegExp('\\' + path.sep + 'themes\\' + path.sep + '([a-z]+)\\' + path.sep));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -51,21 +53,23 @@ app.use(function(req, res, next) {
     };
     next();
 });
-app.use(less(path.join(__dirname, 'public'), {
-    force: app.get('dev'),
-    preprocess: {
-        path: function (pathname, req) {
-            return pathname.replace(app.get('themeRegExp'), path.sep);
+if(app.get('dev') === true) {
+    app.use(less(path.join(__dirname, 'public'), {
+        force: true,
+        preprocess: {
+            path: function (pathname, req) {
+                return pathname.replace(app.get('themeRegExp'), path.sep);
+            },
+            less: function (src, req) {
+                var variables = 'stylesheets/themes/' + req.context.theme + '/less/variables.less';
+                return '@import "' + variables + '";\n' + src;
+            }
         },
-        less: function (src, req) {
-            var variables = 'stylesheets/themes/' + req.context.theme + '/less/variables.less';
-            return '@import "' + variables + '";\n' + src;
+        compiler: {
+            compress: false
         }
-    },
-    compiler: {
-        compress: !app.get('dev')
-    }
-}));
+    }));
+}
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
@@ -80,5 +84,5 @@ app.get('/api/home/widgets', homeService.getWidgets);
 app.get('/api/home/widget/:widgetId/document/:documentId', homeService.getWidget);
 
 http.createServer(app).listen(app.get('port'), function(){
-    console.log('Express server listening on port ' + app.get('port'));
+    console.log('Express server listening on port ' + app.get('port') + (app.get('dev') ? ' (Development mode)' : ' (Production mode)'));
 });
