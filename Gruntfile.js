@@ -84,13 +84,32 @@ module.exports = function(grunt) {
                 }
             }
         },
+        less: {
+            dist: {
+                options: {
+                    rootpath: '../',
+                    compress: true,
+                    ieCompat: false,
+                    preprocess: function(src, path) {
+                        return '@import "public/stylesheets/themes/default/less/variables.less";\n'+ src;
+                    }
+                },
+                files: {
+                    'public/stylesheets/themes/default/index/login/login.css': 'public/stylesheets/index/login/login.less',
+                    'public/stylesheets/themes/default/index/main/main.css': 'public/stylesheets/index/main/main.less',
+                    'public/stylesheets/themes/default/index/main/home/home.css': 'public/stylesheets/index/main/home/home.less',
+                    'public/stylesheets/themes/default/index/main/apps/apps.css': 'public/stylesheets/index/main/apps/apps.less'
+                }
+            }
+        },
         cssmin: {
             combine: {
                 files: {
                     'dist/stylesheets/<%= pkg.name %>-<%= pkg.version %>.min.css': [
                         'public/stylesheets/themes/default/index/login/login.css',
                         'public/stylesheets/themes/default/index/main/main.css',
-                        'public/stylesheets/themes/default/index/main/home/home.css'
+                        'public/stylesheets/themes/default/index/main/home/home.css',
+                        'public/stylesheets/themes/default/index/main/apps/apps.css'
                     ]
                 }
             }
@@ -185,6 +204,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-closurecompiler');
     grunt.loadNpmTasks('grunt-contrib-jade');
+    grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-string-replace');
@@ -195,6 +215,7 @@ module.exports = function(grunt) {
         'clean',
         'closurecompiler',
         'jade',
+        'less',
         'cssmin',
         'copy',
         'string-replace',
