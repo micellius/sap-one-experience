@@ -1,3 +1,8 @@
+var opts = {mock: true};
+var authenticationService = require('./services/authentication.js')(opts);
+var themeService = require('./services/theme.js')(opts);
+var homeService = require('./services/home.js')(opts);
+
 module.exports = function(grunt) {
 
     grunt.initConfig({
@@ -174,26 +179,26 @@ module.exports = function(grunt) {
         'file-creator': {
             api: {
                 "dist/api/themes": function(fs, fd, done) {
-                    var data = '{"status":"OK","results":["default"]}';
+                    var data = themeService.getThemes();
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 },
                 "dist/api/login": function(fs, fd, done) {
-                    var data = '{"status":"OK","results":{"firstName":"Vadim","lastName":"Tomnikov","email":"micellius@gmail.com","avatar":"images/shared/vadim.jpg"}}';
+                    var data = authenticationService.login();
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 },
                 "dist/api/logout": function(fs, fd, done) {
-                    var data = '{"status":"OK"}';
+                    var data = authenticationService.logout();
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 },
                 "dist/api/home/widgets": function(fs, fd, done) {
-                    var data = '{"status":"OK","results":[{"widgetId":"wid","documentId":"did","contentType":"text/plain","name":"Text Widget"}]}';
+                    var data = homeService.getWidgets();
                     fs.mkdirSync("dist/api/home/widget");
                     fs.mkdirSync("dist/api/home/widget/wid");
                     fs.mkdirSync("dist/api/home/widget/wid/document");
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 },
                 "dist/api/home/widget/wid/document/did": function(fs, fd, done) {
-                    var data = 'Hello!';
+                    var data = homeService.getWidget();
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 }
             }

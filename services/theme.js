@@ -3,7 +3,9 @@
  */
 var fs = require('fs'),
     path = require('path'),
-    themes = listThemeDirectories();
+    themes = listThemeDirectories(),
+    theme = {},
+    mock = {};
 
 function listThemeDirectories() {
     var pathToThemes = path.normalize('./public/stylesheets/themes');
@@ -12,9 +14,31 @@ function listThemeDirectories() {
     });
 }
 
-exports.getThemes = function(req, res) {
+theme.getThemes = function(req, res) {
     res.json({
         status: 'OK',
         results: themes
     });
+};
+
+mock.getThemes = function (req, res) {
+    var data = {
+        "status": "OK",
+        "results": ["default"]
+    };
+
+    if(arguments.length) {
+        res.json(data);
+    } else {
+        return JSON.stringify(data);
+    }
+};
+
+module.exports = function(opts) {
+    if(opts) {
+        if(opts.mock) {
+            return mock;
+        }
+    }
+    return theme;
 };

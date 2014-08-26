@@ -14,16 +14,17 @@ var supportedLanguages = ['en', 'ru'];
 var rtlLanguages = ['he'];
 var less = require('less-middleware');
 var index = require('./routes/index.js');
-var authenticationService = require('./services/authentication.js');
-var themeService = require('./services/theme.js');
 var app = express();
 var stdio = require('stdio');
 var opts = stdio.getopt({
     'dev': { description: 'Enable development mode' },
+    'mock': { description: 'Force services to return mock data' },
     'port': { args: 1, description: 'Port to be used by Express (e.g. 3000)' },
     'proxy': { args: 1, description: 'Proxy server URL (e.g. http://proxy:1234)' },
     'site': { args: 1, description: 'HANA Cloud Portal site JSON URL (e.g. http://www.my-site.com:1234/portal/v1/sites/1919e4a3-9322-4cbd-bbae-8f291b49eceb)' }
 });
+var authenticationService = require('./services/authentication.js')(opts);
+var themeService = require('./services/theme.js')(opts);
 var homeService = require('./services/home.js')(opts);
 
 

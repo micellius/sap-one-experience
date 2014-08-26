@@ -4,6 +4,7 @@
 
 var request = require('request');
 var home = {};
+var mock = {};
 var siteUrl = '';
 var host = '';
 var errors = {
@@ -113,6 +114,36 @@ home.getWidget = function (req, res) {
     }
 };
 
+mock.getWidgets = function (req, res) {
+    var data = {
+        "status": "OK",
+        "results": [
+            {
+                "widgetId": "wid",
+                "documentId": "did",
+                "contentType": "text/plain",
+                "name": "Text Widget"
+            }
+        ]
+    };
+
+    if(arguments.length) {
+        res.json(data);
+    } else {
+        return JSON.stringify(data);
+    }
+};
+
+mock.getWidget = function (req, res) {
+    var data = 'Hello';
+
+    if(arguments.length) {
+        res.end(data);
+    } else {
+        return data;
+    }
+};
+
 module.exports = function(opts) {
     if(opts) {
         if(opts.proxy) {
@@ -124,6 +155,9 @@ module.exports = function(opts) {
         if(opts.site) {
             siteUrl = opts.site;
             host = siteUrl.split('portal')[0];
+        }
+        if(opts.mock) {
+            return mock;
         }
     }
     return home;

@@ -316,6 +316,13 @@
     left: auto;
     right: @sap-logo-margin + @navbar-height*4.3 - @sap-gallery-popover-width/2;
     width: @sap-gallery-popover-width;
+    .popover-content {
+      padding: 0;
+      .list-group {
+        margin: 0;
+        color: inherit;
+      }
+    }
   }
 
   .sap-notifications-popover {

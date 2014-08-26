@@ -10,8 +10,8 @@
                 '<div class="popover bottom sap-gallery-popover">' +
                     '<div class="arrow"></div>' +
                     '<div class="popover-content">' +
-                        '<ul class="sap-gallery-list">' +
-                            '<li class="sap-gallery-list-item" ng-repeat="item in items">{{item.name}}</li>' +
+                        '<ul class="list-group">' +
+                            '<li class="list-group-item" ng-repeat="item in items">{{item.name}}</li>' +
                         '</ul>' +
                     '</div>' +
                 '</div>',
