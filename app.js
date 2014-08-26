@@ -76,7 +76,8 @@ app.get('/', index.get);
 app.get('/api/themes', themeService.getThemes);
 app.post('/api/login', authenticationService.login);
 app.post('/api/logout', authenticationService.logout);
-app.get('/api/home', homeService.getHome);
+app.get('/api/home/widgets', homeService.getWidgets);
+app.get('/api/home/widget/:widgetId/document/:documentId', homeService.getWidget);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));

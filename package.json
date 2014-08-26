@@ -16,14 +16,14 @@
   "dependencies": {
     "body-parser": "~1.6.5",
     "compression": "~1.0.11",
-    "express": "~4.8.4",
+    "express": "~4.8.5",
     "express-session": "~1.7.6",
     "jade": "~1.5.0",
-    "less-middleware": "~1.0.3",
+    "less-middleware": "~1.0.4",
     "locale": "~0.0.17",
     "morgan": "~1.2.3",
     "request": "~2.40.0",
-    "serve-favicon": "~2.0.1",
+    "serve-favicon": "~2.1.0",
     "stdio": "~0.2.2"
   },
   "devDependencies": {
@@ -32,7 +32,8 @@
     "grunt-contrib-copy": "~0.5.0",
     "grunt-contrib-cssmin": "~0.10.0",
     "grunt-contrib-jade": "~0.12.0",
-    "grunt-file-creator": "~0.1.1",
+    "grunt-contrib-less": "micellius/grunt-contrib-less",
+    "grunt-file-creator": "~0.1.2",
     "grunt-jslint": "~1.1.12",
     "grunt-string-replace": "~0.2.7"
   },

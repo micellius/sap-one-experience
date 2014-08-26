@@ -24,15 +24,27 @@ module.exports = function(grunt) {
                         // Login
                         'public/javascripts/index/login/login-module.js',
                         'public/javascripts/index/login/**/login-*.js',
-                        // Main
-                        'public/javascripts/index/main/main-module.js',
-                        'public/javascripts/index/main/**/main-*.js',
                         // Home
                         'public/javascripts/index/main/home/home-module.js',
                         'public/javascripts/index/main/home/**/home-*.js',
-                        // Home
-                        'public/javascripts/index/main/home/apps-module.js',
-                        'public/javascripts/index/main/home/**/apps-*.js',
+                        // Apps
+                        'public/javascripts/index/main/apps/apps-module.js',
+                        'public/javascripts/index/main/apps/**/apps-*.js',
+                        // Todos
+                        'public/javascripts/index/main/todos/todos-module.js',
+                        'public/javascripts/index/main/todos/**/todos-*.js',
+                        // Notifications
+                        'public/javascripts/index/main/notifications/notifications-module.js',
+                        'public/javascripts/index/main/notifications/**/notifications-*.js',
+                        // Analytics
+                        'public/javascripts/index/main/analytics/analytics-module.js',
+                        'public/javascripts/index/main/analytics/**/analytics-*.js',
+                        // Documents
+                        'public/javascripts/index/main/documents/documents-module.js',
+                        'public/javascripts/index/main/documents/**/documents-*.js',
+                        // Main
+                        'public/javascripts/index/main/main-module.js',
+                        'public/javascripts/index/main/**/main-*.js',
                         // Index
                         'public/javascripts/index/index-module.js'
                     ]
@@ -72,13 +84,32 @@ module.exports = function(grunt) {
                 }
             }
         },
+        less: {
+            dist: {
+                options: {
+                    rootpath: '../',
+                    compress: true,
+                    ieCompat: false,
+                    preprocess: function(src, path) {
+                        return '@import "public/stylesheets/themes/default/less/variables.less";\n'+ src;
+                    }
+                },
+                files: {
+                    'public/stylesheets/themes/default/index/login/login.css': 'public/stylesheets/index/login/login.less',
+                    'public/stylesheets/themes/default/index/main/main.css': 'public/stylesheets/index/main/main.less',
+                    'public/stylesheets/themes/default/index/main/home/home.css': 'public/stylesheets/index/main/home/home.less',
+                    'public/stylesheets/themes/default/index/main/apps/apps.css': 'public/stylesheets/index/main/apps/apps.less'
+                }
+            }
+        },
         cssmin: {
             combine: {
                 files: {
                     'dist/stylesheets/<%= pkg.name %>-<%= pkg.version %>.min.css': [
                         'public/stylesheets/themes/default/index/login/login.css',
                         'public/stylesheets/themes/default/index/main/main.css',
-                        'public/stylesheets/themes/default/index/main/home/home.css'
+                        'public/stylesheets/themes/default/index/main/home/home.css',
+                        'public/stylesheets/themes/default/index/main/apps/apps.css'
                     ]
                 }
             }
@@ -153,6 +184,17 @@ module.exports = function(grunt) {
                 "dist/api/logout": function(fs, fd, done) {
                     var data = '{"status":"OK"}';
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
+                },
+                "dist/api/home/widgets": function(fs, fd, done) {
+                    var data = '{"status":"OK","results":[{"widgetId":"wid","documentId":"did","contentType":"text/plain","name":"Text Widget"}]}';
+                    fs.mkdirSync("dist/api/home/widget");
+                    fs.mkdirSync("dist/api/home/widget/wid");
+                    fs.mkdirSync("dist/api/home/widget/wid/document");
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
+                },
+                "dist/api/home/widget/wid/document/did": function(fs, fd, done) {
+                    var data = 'Hello!';
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 }
             }
         }
@@ -162,6 +204,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-closurecompiler');
     grunt.loadNpmTasks('grunt-contrib-jade');
+    grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-string-replace');
@@ -172,6 +215,7 @@ module.exports = function(grunt) {
         'clean',
         'closurecompiler',
         'jade',
+        'less',
         'cssmin',
         'copy',
         'string-replace',
