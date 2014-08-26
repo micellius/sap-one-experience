@@ -4,18 +4,19 @@
 (function () {
     'use strict';
 
-    function sapHomeController(sapSharedGalleryService) {
-        sapSharedGalleryService.setItems([{
-            name: 'app1'
-        }, {
-            name: 'app2'
-        }]);
+    function sapHomeController(sapSharedGalleryService, sapHomeWidgetsService) {
+
+        sapHomeWidgetsService.promise.success(function () {
+            sapSharedGalleryService.setItems(sapHomeWidgetsService.getWidgets());
+        });
+
     }
 
     angular.
         module('sapHome').
         controller('sapHomeController', [
             'sapSharedGalleryService',
+            'sapHomeWidgetsService',
             sapHomeController
         ]);
 }());

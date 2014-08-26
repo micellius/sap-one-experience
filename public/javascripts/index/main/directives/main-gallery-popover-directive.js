@@ -11,7 +11,7 @@
                     '<div class="arrow"></div>' +
                     '<div class="popover-content">' +
                         '<ul class="sap-gallery-list">' +
-                            '<li class="sap-gallery-list-item" ng-repeat="item in items"></li>' +
+                            '<li class="sap-gallery-list-item" ng-repeat="item in items">{{item.name}}</li>' +
                         '</ul>' +
                     '</div>' +
                 '</div>',

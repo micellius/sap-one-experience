@@ -174,7 +174,7 @@ module.exports = function(grunt) {
         'file-creator': {
             api: {
                 "dist/api/themes": function(fs, fd, done) {
-                    var data = '{"status":"OK","results":[]}';
+                    var data = '{"status":"OK","results":["default"]}';
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 },
                 "dist/api/login": function(fs, fd, done) {

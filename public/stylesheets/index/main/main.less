@@ -271,12 +271,13 @@
   }
 
   .sap-language-popover {
+    @sap-language-popover-width: 80px;
     display: block;
     position: absolute;
     top: @sap-content-top;
     left: auto;
-    right: @sap-logo-margin + @navbar-height*2.2;
-    width: 80px;
+    right: @sap-logo-margin + @navbar-height*3 - @sap-language-popover-width/2;
+    width: @sap-language-popover-width;
     .popover-content {
       padding: 0;
       .list-group {
@@ -298,12 +299,13 @@
   }
 
   .sap-gallery-popover {
+    @sap-gallery-popover-width: 200px;
     display: block;
     position: absolute;
     top: @sap-content-top;
     left: auto;
-    right: @sap-logo-margin + @navbar-height*3.15;
-    width: 80px;
+    right: @sap-logo-margin + @navbar-height*3.95 - @sap-gallery-popover-width/2;
+    width: 200px;
   }
 
 }

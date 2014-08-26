@@ -43,6 +43,7 @@ exports.get = function(req, res){
             // Home
             '/javascripts/index/main/home/home-module.js',
             '/javascripts/index/main/home/controllers/home-controller.js',
+            '/javascripts/index/main/home/services/home-widgets-service.js',
             // Apps
             '/javascripts/index/main/apps/apps-module.js',
             '/javascripts/index/main/apps/controllers/apps-controller.js',
