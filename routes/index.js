@@ -53,6 +53,7 @@ exports.get = function(req, res){
             // Notifications
             '/javascripts/index/main/notifications/notifications-module.js',
             '/javascripts/index/main/notifications/controllers/notifications-controller.js',
+            '/javascripts/index/main/notifications/services/notifications-feed-service.js',
             // Analytics
             '/javascripts/index/main/analytics/analytics-module.js',
             '/javascripts/index/main/analytics/controllers/analytics-controller.js',

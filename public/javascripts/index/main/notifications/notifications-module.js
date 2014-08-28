@@ -4,16 +4,18 @@
 (function () {
     'use strict';
 
+    function run(sapSharedNotificationsService, sapNotificationsFeedService) {
+        sapNotificationsFeedService.promise.success(function () {
+            sapSharedNotificationsService.setItems(sapNotificationsFeedService.getNotifications());
+        });
+    }
+
     angular.
         module('sapNotifications', ['sapShared']).
-        run(['sapSharedNotificationsService', function (sapSharedNotificationsService) {
-            sapSharedNotificationsService.setItems([{
-                title: 'Notification 1',
-                subtitle: 'Notification 1'
-            }, {
-                title: 'Notification 2',
-                subtitle: 'Notification 2'
-            }]);
-        }]);
+        run([
+            'sapSharedNotificationsService',
+            'sapNotificationsFeedService',
+            run
+        ]);
 
 }());

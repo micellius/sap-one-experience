@@ -2,6 +2,7 @@ var opts = {mock: true};
 var authenticationService = require('./services/authentication.js')(opts);
 var themeService = require('./services/theme.js')(opts);
 var homeService = require('./services/home.js')(opts);
+var notificationsService = require('./services/notification.js')(opts);
 
 module.exports = function(grunt) {
 
@@ -178,27 +179,31 @@ module.exports = function(grunt) {
         },
         'file-creator': {
             api: {
-                "dist/api/themes": function(fs, fd, done) {
+                "dist/api/themes": function (fs, fd, done) {
                     var data = themeService.getThemes();
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 },
-                "dist/api/login": function(fs, fd, done) {
+                "dist/api/login": function (fs, fd, done) {
                     var data = authenticationService.login();
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 },
-                "dist/api/logout": function(fs, fd, done) {
+                "dist/api/logout": function (fs, fd, done) {
                     var data = authenticationService.logout();
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 },
-                "dist/api/home/widgets": function(fs, fd, done) {
+                "dist/api/home/widgets": function (fs, fd, done) {
                     var data = homeService.getWidgets();
                     fs.mkdirSync("dist/api/home/widget");
                     fs.mkdirSync("dist/api/home/widget/wid");
                     fs.mkdirSync("dist/api/home/widget/wid/document");
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 },
-                "dist/api/home/widget/wid/document/did": function(fs, fd, done) {
+                "dist/api/home/widget/wid/document/did": function (fs, fd, done) {
                     var data = homeService.getWidget();
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
+                },
+                "dist/api/notifications": function (fs, fd, done) {
+                    var data = notificationsService.getNotifications();
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 }
             }

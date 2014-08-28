@@ -26,6 +26,7 @@ var opts = stdio.getopt({
 var authenticationService = require('./services/authentication.js')(opts);
 var themeService = require('./services/theme.js')(opts);
 var homeService = require('./services/home.js')(opts);
+var notificationService = require('./services/notification.js')(opts);
 
 
 app.set('port', opts.port || 3000);
@@ -83,6 +84,7 @@ app.post('/api/login', authenticationService.login);
 app.post('/api/logout', authenticationService.logout);
 app.get('/api/home/widgets', homeService.getWidgets);
 app.get('/api/home/widget/:widgetId/document/:documentId', homeService.getWidget);
+app.get('/api/notifications', notificationService.getNotifications);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port') + (app.get('dev') ? ' (Development mode)' : ' (Production mode)'));
