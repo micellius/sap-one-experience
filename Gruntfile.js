@@ -71,10 +71,10 @@ module.exports = function(grunt) {
                     pretty: true,
                     data: {
                         bootstrap: JSON.stringify({
-                            title: 'SAP One Experience',
                             dir: 'ltr',
                             locale: 'en',
-                            theme: 'default'
+                            theme: 'default',
+                            user: null
                         }),
                         stylesheets: [
                             'stylesheets/bootstrap.min.css',
