@@ -9,7 +9,11 @@
             title: sapSharedI18nService.translate('appsGalleryTitle')
         });
         sapSharedGalleryService.setItems([{
-            name: 'app1'
+            name: 'Report GW8-1282',
+            contentType: 'document'
+        }, {
+            name: 'Product Preview',
+            contentType: 'image'
         }]);
     }
 
