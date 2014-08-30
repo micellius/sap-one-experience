@@ -3,6 +3,9 @@ var authenticationService = require('./services/authentication.js')(opts);
 var themeService = require('./services/theme.js')(opts);
 var homeService = require('./services/home.js')(opts);
 var notificationsService = require('./services/notification.js')(opts);
+var todoService = require('./services/todo.js')(opts);
+var analyticService = require('./services/analytic.js')(opts);
+var documentService = require('./services/document.js')(opts);
 
 module.exports = function(grunt) {
 
@@ -204,6 +207,18 @@ module.exports = function(grunt) {
                 },
                 "dist/api/notifications": function (fs, fd, done) {
                     var data = notificationsService.getNotifications();
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
+                },
+                "dist/api/todos": function (fs, fd, done) {
+                    var data = todoService.getTodos();
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
+                },
+                "dist/api/reports": function (fs, fd, done) {
+                    var data = analyticService.getReports();
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
+                },
+                "dist/api/documents": function (fs, fd, done) {
+                    var data = documentService.getDocuments();
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 }
             }
