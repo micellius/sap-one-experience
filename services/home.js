@@ -119,10 +119,25 @@ mock.getWidgets = function (req, res) {
         "status": "OK",
         "results": [
             {
-                "widgetId": "wid",
-                "documentId": "did",
+                "widgetId": "wid1",
+                "documentId": "did1",
                 "contentType": "text/plain",
                 "name": "Text Widget"
+            }, {
+                "widgetId": "wid2",
+                "documentId": "did2",
+                "contentType": "image/png",
+                "name": "Image Widget"
+            }, {
+                "widgetId": "wid3",
+                "documentId": "did3",
+                "contentType": "document/pdf",
+                "name": "Document Widget"
+            }, {
+                "widgetId": "wid4",
+                "documentId": "did4",
+                "contentType": "video/mp4",
+                "name": "Video Widget"
             }
         ]
     };

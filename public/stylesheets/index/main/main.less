@@ -309,18 +309,30 @@
   }
 
   .sap-gallery-popover {
-    @sap-gallery-popover-width: 200px;
+    @sap-gallery-popover-width: 400px;
     display: block;
     position: absolute;
     top: @sap-content-top;
     left: auto;
-    right: @sap-logo-margin + @navbar-height*4.3 - @sap-gallery-popover-width/2;
+    right: @sap-logo-margin + @navbar-height*4.275 - @sap-gallery-popover-width/2;
     width: @sap-gallery-popover-width;
+    max-width: @sap-gallery-popover-width;
     .popover-content {
       padding: 0;
       .list-group {
         margin: 0;
         color: inherit;
+        padding-left: @panel-body-padding/2;
+        padding-bottom: @panel-body-padding/2;
+        .list-group-item {
+          display: inline-block;
+          border-radius: 0;
+          margin: @panel-body-padding/2 @panel-body-padding/2 0 0;
+          width: (@sap-gallery-popover-width - @panel-body-padding)/2 - 6px;
+          .glyphicon {
+            margin-right: @padding-base-horizontal;
+          }
+        }
       }
     }
   }
