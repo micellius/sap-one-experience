@@ -7,7 +7,8 @@
 
     function sapSharedGalleryService() {
 
-        var items = [];
+        var items = [],
+            messages = {};
 
         this.setItems = function (collection) {
             items.length = 0;
@@ -18,6 +19,25 @@
 
         this.getItems = function () {
             return items;
+        };
+
+        this.setMessages = function (msg) {
+            var key,
+                value;
+            for (key in msg) {
+                if (msg.hasOwnProperty(key)) {
+                    value = msg[key];
+                    if (value) {
+                        messages[key] = value;
+                    } else {
+                        delete messages[key];
+                    }
+                }
+            }
+        };
+
+        this.getMessages = function () {
+            return messages;
         };
     }
 

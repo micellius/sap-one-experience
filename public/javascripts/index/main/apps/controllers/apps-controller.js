@@ -4,7 +4,10 @@
 (function () {
     'use strict';
 
-    function sapAppsController(sapSharedGalleryService) {
+    function sapAppsController(sapSharedGalleryService, sapSharedI18nService) {
+        sapSharedGalleryService.setMessages({
+            title: sapSharedI18nService.translate('appsGalleryTitle')
+        });
         sapSharedGalleryService.setItems([{
             name: 'app1'
         }]);
@@ -14,6 +17,7 @@
         module('sapApps').
         controller('sapAppsController', [
             'sapSharedGalleryService',
+            'sapSharedI18nService',
             sapAppsController
         ]);
 }());

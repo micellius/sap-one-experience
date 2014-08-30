@@ -9,6 +9,7 @@
             template:
                 '<div class="popover bottom sap-gallery-popover">' +
                     '<div class="arrow"></div>' +
+                    '<h3 class="popover-title">{{msg.title}}</h3>' +
                     '<div class="popover-content">' +
                         '<ul class="list-group">' +
                             '<li class="list-group-item" ng-repeat="item in items">{{item.name}}</li>' +
@@ -19,6 +20,7 @@
             scope: true,
             link: function (scope) {
                 scope.items = sapSharedGalleryService.getItems();
+                scope.msg = sapSharedGalleryService.getMessages();
             }
         };
     }

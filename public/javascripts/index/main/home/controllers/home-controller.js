@@ -4,9 +4,12 @@
 (function () {
     'use strict';
 
-    function sapHomeController(sapSharedGalleryService, sapHomeWidgetsService) {
+    function sapHomeController(sapSharedGalleryService, sapSharedI18nService, sapHomeWidgetsService) {
 
         sapHomeWidgetsService.promise.success(function () {
+            sapSharedGalleryService.setMessages({
+                title: sapSharedI18nService.translate('homeGalleryTitle')
+            });
             sapSharedGalleryService.setItems(sapHomeWidgetsService.getWidgets());
         });
 
@@ -16,6 +19,7 @@
         module('sapHome').
         controller('sapHomeController', [
             'sapSharedGalleryService',
+            'sapSharedI18nService',
             'sapHomeWidgetsService',
             sapHomeController
         ]);

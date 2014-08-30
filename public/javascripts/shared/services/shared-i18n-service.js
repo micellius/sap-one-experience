@@ -77,7 +77,9 @@
                         "languageSwitch": "Language",
                         "userProfile": "User profile",
                         "gallerySwitch": "Galley",
-                        "notificationsSwitch": "Notifications"
+                        "notificationsSwitch": "Notifications",
+                        "homeGalleryTitle": "Widgets",
+                        "appsGalleryTitle": "Applications"
                     }
                 },
                 "ru": {
@@ -107,7 +109,9 @@
                         "languageSwitch": "Язык",
                         "userProfile": "Профиль пользователя",
                         "gallerySwitch": "Галлерея",
-                        "notificationsSwitch": "Уведомления"
+                        "notificationsSwitch": "Уведомления",
+                        "homeGalleryTitle": "Виджеты",
+                        "appsGalleryTitle": "Приложения"
                     }
                 }
             };
