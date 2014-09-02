@@ -33,6 +33,7 @@ exports.get = function(req, res){
             '/javascripts/shared/services/shared-authentication-service.js',
             '/javascripts/shared/services/shared-i18n-service.js',
             '/javascripts/shared/services/shared-theme-service.js',
+            '/javascripts/shared/services/shared-css-service.js',
             '/javascripts/shared/services/shared-gallery-service.js',
             '/javascripts/shared/services/shared-notifications-service.js',
             '/javascripts/shared/directives/shared-dropdown-directive.js',
@@ -44,6 +45,8 @@ exports.get = function(req, res){
             '/javascripts/index/main/home/home-module.js',
             '/javascripts/index/main/home/controllers/home-controller.js',
             '/javascripts/index/main/home/services/home-widgets-service.js',
+            '/javascripts/index/main/home/services/home-layout-service.js',
+            '/javascripts/index/main/home/directives/home-widget-directive.js',
             // Apps
             '/javascripts/index/main/apps/apps-module.js',
             '/javascripts/index/main/apps/controllers/apps-controller.js',

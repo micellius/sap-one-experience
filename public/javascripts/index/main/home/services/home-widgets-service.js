@@ -30,6 +30,17 @@
         this.getWidgets = function () {
             return widgets;
         };
+
+        this.getWidgetContentUrl = function (widgetId, documentId) {
+            return 'api/home/widget/' + widgetId + '/document/' + documentId;
+        };
+
+        this.getWidgetContent = function (widgetId, documentId) {
+            return $http({
+                method: 'GET',
+                url: this.getWidgetContentUrl(widgetId, documentId)
+            });
+        };
     }
 
     angular.

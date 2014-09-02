@@ -4,13 +4,14 @@
 (function () {
     'use strict';
 
-    function sapHomeController(sapSharedGalleryService, sapSharedI18nService, sapHomeWidgetsService) {
+    function sapHomeController($scope, sapSharedGalleryService, sapSharedI18nService, sapHomeWidgetsService) {
 
         sapHomeWidgetsService.promise.success(function () {
             sapSharedGalleryService.setMessages({
                 title: sapSharedI18nService.translate('homeGalleryTitle')
             });
             sapSharedGalleryService.setItems(sapHomeWidgetsService.getWidgets());
+            $scope.widgets = sapHomeWidgetsService.getWidgets();
         });
 
     }
@@ -18,6 +19,7 @@
     angular.
         module('sapHome').
         controller('sapHomeController', [
+            '$scope',
             'sapSharedGalleryService',
             'sapSharedI18nService',
             'sapHomeWidgetsService',
