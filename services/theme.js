@@ -24,7 +24,24 @@ theme.getThemes = function(req, res) {
 mock.getThemes = function (req, res) {
     var data = {
         "status": "OK",
-        "results": ["default"]
+        "results": [
+            "amelia",
+            "cerulean",
+            "cosmo",
+            "cyborg",
+            "darkly",
+            "default",
+            "flatly",
+            "journal",
+            "lumen",
+            "readable",
+            "simplex",
+            "slate",
+            "spacelab",
+            "superhero",
+            "united",
+            "yeti"
+        ]
     };
 
     if(arguments.length) {
