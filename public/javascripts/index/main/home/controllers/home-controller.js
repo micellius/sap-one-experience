@@ -4,18 +4,25 @@
 (function () {
     'use strict';
 
-    function sapHomeController(sapSharedGalleryService) {
-        sapSharedGalleryService.setItems([{
-            name: 'app1'
-        }, {
-            name: 'app2'
-        }]);
+    function sapHomeController($scope, sapSharedGalleryService, sapSharedI18nService, sapHomeWidgetsService) {
+
+        sapHomeWidgetsService.promise.success(function () {
+            sapSharedGalleryService.setMessages({
+                title: sapSharedI18nService.translate('homeGalleryTitle')
+            });
+            sapSharedGalleryService.setItems(sapHomeWidgetsService.getWidgets());
+            $scope.widgets = sapHomeWidgetsService.getWidgets();
+        });
+
     }
 
     angular.
         module('sapHome').
         controller('sapHomeController', [
+            '$scope',
             'sapSharedGalleryService',
+            'sapSharedI18nService',
+            'sapHomeWidgetsService',
             sapHomeController
         ]);
 }());

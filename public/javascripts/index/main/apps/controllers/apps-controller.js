@@ -4,9 +4,16 @@
 (function () {
     'use strict';
 
-    function sapAppsController(sapSharedGalleryService) {
+    function sapAppsController(sapSharedGalleryService, sapSharedI18nService) {
+        sapSharedGalleryService.setMessages({
+            title: sapSharedI18nService.translate('appsGalleryTitle')
+        });
         sapSharedGalleryService.setItems([{
-            name: 'app1'
+            name: 'Report GW8-1282',
+            contentType: 'document'
+        }, {
+            name: 'Product Preview',
+            contentType: 'image'
         }]);
     }
 
@@ -14,6 +21,7 @@
         module('sapApps').
         controller('sapAppsController', [
             'sapSharedGalleryService',
+            'sapSharedI18nService',
             sapAppsController
         ]);
 }());

@@ -4,6 +4,7 @@
 
 var request = require('request');
 var home = {};
+var mock = {};
 var siteUrl = '';
 var host = '';
 var errors = {
@@ -58,25 +59,40 @@ function sendErrorText(res, error) {
 home.getWidgets = function (req, res) {
     if(siteUrl) {
         request.get(siteUrl, function (error, response, body) {
+            var pages,
+                apps;
             if (error) {
                 sendErrorJson(res, error);
             } else {
                 try {
                     body = JSON.parse(body);
                     if(body.status.toUpperCase() === 'OK') {
+                        pages = {};
+                        body.site.pages.forEach(function (page) {
+                            var key,
+                                layout = JSON.parse(page.layout);
+                            pages[page.ID] = {};
+                            for(key in layout) {
+                                if(layout.hasOwnProperty(key) && key.length === 36) {
+                                    pages[page.ID][key] = layout[key];
+                                }
+                            }
+                        });
+                        apps = body.site.apps.map(function (app) {
+                            var contentType = JSON.parse(fixJson(app.globalProperties.filter(function(property) {
+                                return property.key === 'ecm';
+                            })[0].value)).contentType;
+                            return {
+                                widgetId: app.ID,
+                                documentId: app.ecmIds,
+                                contentType: contentType,
+                                name: app.name,
+                                layout: pages[app.containerID][app.ID]
+                            };
+                        });
                         res.json({
                             status: 'OK',
-                            results: body.site.apps.map(function (app) {
-                                var contentType = JSON.parse(fixJson(app.globalProperties.filter(function(property) {
-                                    return property.key === 'ecm';
-                                })[0].value)).contentType;
-                                return {
-                                    widgetId: app.ID,
-                                    documentId: app.ecmIds,
-                                    contentType: contentType,
-                                    name: app.name
-                                };
-                            })
+                            results: apps
                         });
                     } else {
                         sendErrorJson(res, body.error);
@@ -113,6 +129,79 @@ home.getWidget = function (req, res) {
     }
 };
 
+mock.getWidgets = function (req, res) {
+    var data = {
+        "status": "OK",
+        "results": [
+            {
+                "widgetId": "wid1",
+                "documentId": "did1",
+                "contentType": "text/plain",
+                "name": "Text Widget",
+                "layout": {
+                    "top": 2,
+                    "left": 2,
+                    "width": 58,
+                    "height": 10,
+                    "showFrameArea": true
+                }
+            }, {
+                "widgetId": "wid2",
+                "documentId": "did2",
+                "contentType": "image/png",
+                "name": "Image Widget",
+                "layout": {
+                    "top": 13,
+                    "left": 40,
+                    "width": 20,
+                    "height": 10,
+                    "showFrameArea": true
+                }
+            }, {
+                "widgetId": "wid3",
+                "documentId": "did3",
+                "contentType": "document/pdf",
+                "name": "Document Widget",
+                "layout": {
+                    "top": 13,
+                    "left": 2,
+                    "width": 10,
+                    "height": 20,
+                    "showFrameArea": true
+                }
+            }, {
+                "widgetId": "wid4",
+                "documentId": "did4",
+                "contentType": "video/mp4",
+                "name": "Video Widget",
+                "layout": {
+                    "top": 13,
+                    "left": 13,
+                    "width": 26,
+                    "height": 20,
+                    "showFrameArea": true
+                }
+            }
+        ]
+    };
+
+    if(arguments.length) {
+        res.json(data);
+    } else {
+        return JSON.stringify(data);
+    }
+};
+
+mock.getWidget = function (req, res) {
+    var data = 'Hello';
+
+    if(arguments.length) {
+        res.end(data);
+    } else {
+        return data;
+    }
+};
+
 module.exports = function(opts) {
     if(opts) {
         if(opts.proxy) {
@@ -124,6 +213,9 @@ module.exports = function(opts) {
         if(opts.site) {
             siteUrl = opts.site;
             host = siteUrl.split('portal')[0];
+        }
+        if(opts.mock) {
+            return mock;
         }
     }
     return home;

@@ -126,6 +126,9 @@
     .navbar {
       border-radius: 0;
     }
+    .navbar-brand {
+      outline: none;
+    }
     .sap-navbar-button {
       display: inline-block;
       vertical-align: top;
@@ -133,6 +136,7 @@
       color: @navbar-default-color;
       border: none;
       min-height: @navbar-height;
+      min-width: @navbar-height;
       outline: none;
       &:hover {
         background: @navbar-default-link-active-bg;
@@ -146,8 +150,17 @@
           margin-right: 0.5em;
         }
       }
-      &.sap-gallery-button {
+      &.sap-gallery-button,
+      &.sap-notifications-button {
+        position: relative;
         font-size: x-large;
+      }
+      &.sap-notifications-button .badge {
+        display: block;
+        position: absolute;
+        top: 0.25em;
+        right: 0.25em;
+        background-color: @brand-danger;
       }
     }
     .sap-separator {
@@ -271,12 +284,13 @@
   }
 
   .sap-language-popover {
+    @sap-language-popover-width: 80px;
     display: block;
     position: absolute;
     top: @sap-content-top;
     left: auto;
-    right: @sap-logo-margin + @navbar-height*2.2;
-    width: 80px;
+    right: @sap-logo-margin + @navbar-height*3 - @sap-language-popover-width/2;
+    width: @sap-language-popover-width;
     .popover-content {
       padding: 0;
       .list-group {
@@ -298,12 +312,61 @@
   }
 
   .sap-gallery-popover {
+    @sap-gallery-popover-width: 400px;
     display: block;
     position: absolute;
     top: @sap-content-top;
     left: auto;
-    right: @sap-logo-margin + @navbar-height*3.15;
-    width: 80px;
+    right: @sap-logo-margin + @navbar-height*4.275 - @sap-gallery-popover-width/2;
+    width: @sap-gallery-popover-width;
+    max-width: @sap-gallery-popover-width;
+    .popover-content {
+      padding: 0;
+      .list-group {
+        margin: 0;
+        color: inherit;
+        padding-left: @panel-body-padding/2;
+        padding-bottom: @panel-body-padding/2;
+        .list-group-item {
+          display: inline-block;
+          border-radius: 0;
+          margin: @panel-body-padding/2 @panel-body-padding/2 0 0;
+          width: (@sap-gallery-popover-width - @panel-body-padding)/2 - 6px;
+          cursor: pointer;
+          .glyphicon {
+            margin-right: @padding-base-horizontal;
+          }
+        }
+      }
+    }
+  }
+
+  .sap-notifications-popover {
+    @sap-notifications-popover-width: 200px;
+    display: block;
+    position: absolute;
+    top: @sap-content-top;
+    left: auto;
+    right: @sap-logo-margin + @navbar-height*5.45 - @sap-notifications-popover-width/2;
+    width: @sap-notifications-popover-width;
+    .popover-content {
+      padding: 0;
+      .list-group {
+        margin: 0;
+        color: inherit;
+        padding-left: @panel-body-padding/2;
+        padding-bottom: @panel-body-padding/2;
+        .list-group-item {
+          display: inline-block;
+          border-radius: 0;
+          margin: @panel-body-padding/2 @panel-body-padding/2 0 0;
+          width: @sap-notifications-popover-width - @panel-body-padding - 4px;
+          .glyphicon {
+            margin-right: @padding-base-horizontal;
+          }
+        }
+      }
+    }
   }
 
 }

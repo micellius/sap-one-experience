@@ -4,14 +4,20 @@
 (function () {
     'use strict';
 
-    function sapTodosController(sapSharedGalleryService) {
+    function sapTodosController($scope, sapSharedGalleryService, sapTodosFeedService) {
         sapSharedGalleryService.setItems([]);
+
+        sapTodosFeedService.promise.success(function () {
+            $scope.items = sapTodosFeedService.getTodos();
+        });
     }
 
     angular.
         module('sapTodos').
         controller('sapTodosController', [
+            '$scope',
             'sapSharedGalleryService',
+            'sapTodosFeedService',
             sapTodosController
         ]);
 }());

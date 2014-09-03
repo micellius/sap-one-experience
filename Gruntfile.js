@@ -1,3 +1,12 @@
+var opts = {mock: true};
+var authenticationService = require('./services/authentication.js')(opts);
+var themeService = require('./services/theme.js')(opts);
+var homeService = require('./services/home.js')(opts);
+var notificationsService = require('./services/notification.js')(opts);
+var todoService = require('./services/todo.js')(opts);
+var analyticService = require('./services/analytic.js')(opts);
+var documentService = require('./services/document.js')(opts);
+
 module.exports = function(grunt) {
 
     grunt.initConfig({
@@ -62,10 +71,10 @@ module.exports = function(grunt) {
                     pretty: true,
                     data: {
                         bootstrap: JSON.stringify({
-                            title: 'SAP One Experience',
                             dir: 'ltr',
                             locale: 'en',
-                            theme: 'default'
+                            theme: 'default',
+                            user: null
                         }),
                         stylesheets: [
                             'stylesheets/bootstrap.min.css',
@@ -90,7 +99,7 @@ module.exports = function(grunt) {
                     rootpath: '../',
                     compress: true,
                     ieCompat: false,
-                    preprocess: function(src, path) {
+                    preprocess: function(src) {
                         return '@import "public/stylesheets/themes/default/less/variables.less";\n'+ src;
                     }
                 },
@@ -98,7 +107,11 @@ module.exports = function(grunt) {
                     'public/stylesheets/themes/default/index/login/login.css': 'public/stylesheets/index/login/login.less',
                     'public/stylesheets/themes/default/index/main/main.css': 'public/stylesheets/index/main/main.less',
                     'public/stylesheets/themes/default/index/main/home/home.css': 'public/stylesheets/index/main/home/home.less',
-                    'public/stylesheets/themes/default/index/main/apps/apps.css': 'public/stylesheets/index/main/apps/apps.less'
+                    'public/stylesheets/themes/default/index/main/apps/apps.css': 'public/stylesheets/index/main/apps/apps.less',
+                    'public/stylesheets/themes/default/index/main/todos/todos.css': 'public/stylesheets/index/main/todos/todos.less',
+                    'public/stylesheets/themes/default/index/main/notifications/notifications.css': 'public/stylesheets/index/main/notifications/notifications.less',
+                    'public/stylesheets/themes/default/index/main/analytics/analytics.css': 'public/stylesheets/index/main/analytics/analytics.less',
+                    'public/stylesheets/themes/default/index/main/documents/documents.css': 'public/stylesheets/index/main/documents/documents.less'
                 }
             }
         },
@@ -159,7 +172,7 @@ module.exports = function(grunt) {
             }
         },
         'string-replace': {
-            dist: {
+            css: {
                 options: {
                     replacements: [{
                         pattern: /\(\/images\//gm,
@@ -169,31 +182,58 @@ module.exports = function(grunt) {
                 files: {
                     'dist/stylesheets/<%= pkg.name %>-<%= pkg.version %>.min.css': 'dist/stylesheets/<%= pkg.name %>-<%= pkg.version %>.min.css'
                 }
+            },
+            js: {
+                options: {
+                    replacements: [{
+                        pattern: /\.post\(/gm,
+                        replacement: '.get('
+                    }]
+                },
+                files: {
+                    'dist/javascripts/<%= pkg.name %>-<%= pkg.version %>.min.js': 'dist/javascripts/<%= pkg.name %>-<%= pkg.version %>.min.js'
+                }
             }
         },
         'file-creator': {
             api: {
-                "dist/api/themes": function(fs, fd, done) {
-                    var data = '{"status":"OK","results":[]}';
+                "dist/api/themes": function (fs, fd, done) {
+                    var data = themeService.getThemes();
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 },
-                "dist/api/login": function(fs, fd, done) {
-                    var data = '{"status":"OK","results":{"firstName":"Vadim","lastName":"Tomnikov","email":"micellius@gmail.com","avatar":"images/shared/vadim.jpg"}}';
+                "dist/api/login": function (fs, fd, done) {
+                    var data = authenticationService.login();
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 },
-                "dist/api/logout": function(fs, fd, done) {
-                    var data = '{"status":"OK"}';
+                "dist/api/logout": function (fs, fd, done) {
+                    var data = authenticationService.logout();
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 },
-                "dist/api/home/widgets": function(fs, fd, done) {
-                    var data = '{"status":"OK","results":[{"widgetId":"wid","documentId":"did","contentType":"text/plain","name":"Text Widget"}]}';
+                "dist/api/home/widgets": function (fs, fd, done) {
+                    var data = homeService.getWidgets();
                     fs.mkdirSync("dist/api/home/widget");
                     fs.mkdirSync("dist/api/home/widget/wid");
                     fs.mkdirSync("dist/api/home/widget/wid/document");
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 },
-                "dist/api/home/widget/wid/document/did": function(fs, fd, done) {
-                    var data = 'Hello!';
+                "dist/api/home/widget/wid/document/did": function (fs, fd, done) {
+                    var data = homeService.getWidget();
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
+                },
+                "dist/api/notifications": function (fs, fd, done) {
+                    var data = notificationsService.getNotifications();
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
+                },
+                "dist/api/todos": function (fs, fd, done) {
+                    var data = todoService.getTodos();
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
+                },
+                "dist/api/reports": function (fs, fd, done) {
+                    var data = analyticService.getReports();
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
+                },
+                "dist/api/documents": function (fs, fd, done) {
+                    var data = documentService.getDocuments();
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 }
             }

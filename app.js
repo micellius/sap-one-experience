@@ -14,22 +14,29 @@ var supportedLanguages = ['en', 'ru'];
 var rtlLanguages = ['he'];
 var less = require('less-middleware');
 var index = require('./routes/index.js');
-var authenticationService = require('./services/authentication.js');
-var themeService = require('./services/theme.js');
 var app = express();
 var stdio = require('stdio');
 var opts = stdio.getopt({
+    'dev': { description: 'Enable development mode' },
+    'mock': { description: 'Force services to return mock data' },
+    'port': { args: 1, description: 'Port to be used by Express (e.g. 3000)' },
     'proxy': { args: 1, description: 'Proxy server URL (e.g. http://proxy:1234)' },
     'site': { args: 1, description: 'HANA Cloud Portal site JSON URL (e.g. http://www.my-site.com:1234/portal/v1/sites/1919e4a3-9322-4cbd-bbae-8f291b49eceb)' },
     'fiori': { args: 1, description: 'Fiori oDATA service URL (e.g. https://host:port)'},
     'fioriAuth': { args: 1, description: 'Fiori oDATA service credentials (e.g. username:password)'}
 });
+var authenticationService = require('./services/authentication.js')(opts);
+var themeService = require('./services/theme.js')(opts);
 var homeService = require('./services/home.js')(opts);
+var notificationService = require('./services/notification.js')(opts);
+var todoService = require('./services/todo.js')(opts);
+var analyticService = require('./services/analytic.js')(opts);
+var documentService = require('./services/document.js')(opts);
 var groupService = require('./services/group.js')(opts);
 
 
-app.set('port', 3000);
-app.set('dev', true);
+app.set('port', opts.port || 3000);
+app.set('dev', opts.dev || false);
 app.set('themeRegExp', new RegExp('\\' + path.sep + 'themes\\' + path.sep + '([a-z]+)\\' + path.sep));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -54,21 +61,23 @@ app.use(function(req, res, next) {
     };
     next();
 });
-app.use(less(path.join(__dirname, 'public'), {
-    force: app.get('dev'),
-    preprocess: {
-        path: function (pathname, req) {
-            return pathname.replace(app.get('themeRegExp'), path.sep);
+if(app.get('dev') === true) {
+    app.use(less(path.join(__dirname, 'public'), {
+        force: true,
+        preprocess: {
+            path: function (pathname, req) {
+                return pathname.replace(app.get('themeRegExp'), path.sep);
+            },
+            less: function (src, req) {
+                var variables = 'stylesheets/themes/' + req.context.theme + '/less/variables.less';
+                return '@import "' + variables + '";\n' + src;
+            }
         },
-        less: function (src, req) {
-            var variables = 'stylesheets/themes/' + req.context.theme + '/less/variables.less';
-            return '@import "' + variables + '";\n' + src;
+        compiler: {
+            compress: false
         }
-    },
-    compiler: {
-        compress: !app.get('dev')
-    }
-}));
+    }));
+}
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
@@ -82,7 +91,11 @@ app.post('/api/logout', authenticationService.logout);
 app.get('/api/home/widgets', homeService.getWidgets);
 app.get('/api/home/widget/:widgetId/document/:documentId', homeService.getWidget);
 app.get('/api/groups', groupService.getUserGroups);
+app.get('/api/notifications', notificationService.getNotifications);
+app.get('/api/todos', todoService.getTodos);
+app.get('/api/reports', analyticService.getReports);
+app.get('/api/documents', documentService.getDocuments);
 
 http.createServer(app).listen(app.get('port'), function(){
-    console.log('Express server listening on port ' + app.get('port'));
+    console.log('Express server listening on port ' + app.get('port') + (app.get('dev') ? ' (Development mode)' : ' (Production mode)'));
 });

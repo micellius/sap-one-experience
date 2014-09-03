@@ -9,4 +9,41 @@
   background-repeat: no-repeat;
   background-position: left center;
   background-attachment: fixed;
+
+  .sap-home-widget > .panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 0;
+    border: none;
+    overflow: hidden;
+    > .panel-heading {
+      display: none;
+    }
+    .sap-home-widget-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+  }
+
+  .sap-home-widget.sap-home-widget-frame > .panel {
+    .panel-heading {
+      display: block;
+    }
+  }
+
+  .sap-home-widget.sap-hidden {
+    display: none;
+  }
+
 }

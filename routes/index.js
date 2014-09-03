@@ -10,7 +10,6 @@ exports.get = function(req, res){
 
     res.render('index', {
         bootstrap: JSON.stringify({
-            title: 'SAP One Experience',
             dir: dir,
             locale: locale,
             theme: theme,
@@ -21,7 +20,8 @@ exports.get = function(req, res){
             '/stylesheets/themes/' + theme + '/index/login/login.css',
             '/stylesheets/themes/' + theme + '/index/main/main.css',
             '/stylesheets/themes/' + theme + '/index/main/home/home.css',
-            '/stylesheets/themes/' + theme + '/index/main/apps/apps.css'
+            '/stylesheets/themes/' + theme + '/index/main/apps/apps.css',
+            '/stylesheets/themes/' + theme + '/index/main/todos/todos.css'
         ],
         javascripts: [
             // Libs
@@ -34,7 +34,9 @@ exports.get = function(req, res){
             '/javascripts/shared/services/shared-authentication-service.js',
             '/javascripts/shared/services/shared-i18n-service.js',
             '/javascripts/shared/services/shared-theme-service.js',
+            '/javascripts/shared/services/shared-css-service.js',
             '/javascripts/shared/services/shared-gallery-service.js',
+            '/javascripts/shared/services/shared-notifications-service.js',
             '/javascripts/shared/services/shared-group-service.js',
             '/javascripts/shared/directives/shared-dropdown-directive.js',
             '/javascripts/shared/filters/shared-translate-filter.js',
@@ -44,15 +46,21 @@ exports.get = function(req, res){
             // Home
             '/javascripts/index/main/home/home-module.js',
             '/javascripts/index/main/home/controllers/home-controller.js',
+            '/javascripts/index/main/home/services/home-widgets-service.js',
+            '/javascripts/index/main/home/services/home-layout-service.js',
+            '/javascripts/index/main/home/directives/home-widget-directive.js',
             // Apps
             '/javascripts/index/main/apps/apps-module.js',
             '/javascripts/index/main/apps/controllers/apps-controller.js',
             // Todos
             '/javascripts/index/main/todos/todos-module.js',
             '/javascripts/index/main/todos/controllers/todos-controller.js',
+            '/javascripts/index/main/todos/services/todos-feed-service.js',
+            '/javascripts/index/main/todos/directives/todos-item-directive.js',
             // Notifications
             '/javascripts/index/main/notifications/notifications-module.js',
             '/javascripts/index/main/notifications/controllers/notifications-controller.js',
+            '/javascripts/index/main/notifications/services/notifications-feed-service.js',
             // Analytics
             '/javascripts/index/main/analytics/analytics-module.js',
             '/javascripts/index/main/analytics/controllers/analytics-controller.js',
@@ -67,7 +75,10 @@ exports.get = function(req, res){
             '/javascripts/index/main/directives/main-user-popover-directive.js',
             '/javascripts/index/main/directives/main-language-button-directive.js',
             '/javascripts/index/main/directives/main-language-popover-directive.js',
-
+            '/javascripts/index/main/directives/main-gallery-button-directive.js',
+            '/javascripts/index/main/directives/main-gallery-popover-directive.js',
+            '/javascripts/index/main/directives/main-notifications-button-directive.js',
+            '/javascripts/index/main/directives/main-notifications-popover-directive.js',
             // Index
             '/javascripts/index/index-module.js'
         ]

@@ -1,15 +1,10 @@
 var https = require('https');
-var parseString = require('xml2js').parseString;
 var xml2js = require('xml2js');
-var util = require('util');
 var groups = {};
 var host, port , auth, origin;
 
 groups.getUserGroups = function(req, res) {
-    //Call server api to retrieve logged in user's groups and tiles.
 
-
-   console.log(host , port);
     var options = {
         rejectUnauthorized: false,
         hostname: host,
@@ -19,29 +14,22 @@ groups.getUserGroups = function(req, res) {
         auth: auth,
         agent: false
     };
-//  var parser = new xml2js.Parser({explicitChildren : true});
+
     var parser = new xml2js.Parser();
 
     https.get(options, function(response) {
-        console.log("statusCode: ", response.statusCode);
-        console.log("headers: ", response.headers);
 
         var bodyChunks = [];
         response.on('data', function(chunk) {
             bodyChunks.push(chunk);
         }).on('end', function() {
             var body = Buffer.concat(bodyChunks);
-            //console.log('BODY: ' + body);
-
             var jsonResult = [];
+            console.log(body.toString());
             //convert the XML response to JSON using the xml2js
             parser.parseString(body, function (err, result) {
-                //console.dir(result);
-                //console.log(util.inspect(result, false, null));
-
                 var groups =  result.feed.entry;
                 var currentGroupProperties, currentGroupTiles;
-
                 if(groups){
                      for(var i=0; i<groups.length; i++){
                         currentGroupProperties = groups[i].content[0]['m:properties'][0];
@@ -50,8 +38,7 @@ groups.getUserGroups = function(req, res) {
                         var groupJson = {
                             id : currentGroupProperties['d:id'][0],
                             title : currentGroupProperties['d:id'][0]==='/UI2/Fiori2LaunchpadHome'? 'My Home' : currentGroupProperties['d:title'][0],
-                            // tilesOrder : JSON.parse(currentGroupProperties['d:layout']).order, //array of Tiles IDs
-                            tiles: [] //currentGroupTiles
+                            tiles: []
                         };
 
                         //iterate on current group tiles and add them the json
@@ -64,7 +51,7 @@ groups.getUserGroups = function(req, res) {
                                        tileProps = chip.entry[0].content[0]['m:properties'][0]; //currentGroupTiles[k].content[0]['m:properties'][0];
                                        curTile = {
                                             title: tileProps['d:title'][0],
-                                            configuration: parseConfiguration(tileProps['d:configuration'][0]),//JSON.parse( ( tileProps['d:configuration'][0] && JSON.parse(tileProps['d:configuration'][0]).tileConfiguration )    || {}), //|| "tileConfiguration: '{"row":"1","col":"1"}'"   Default value for regular tiles
+                                            configuration: parseConfiguration(tileProps['d:configuration'][0]),
                                             url: tileProps['d:url'][0],
                                             baseChipId: tileProps['d:baseChipId'][0],//identify the type of tile (e.g."X-SAP-UI2-CHIP:/UI2/DYNAMIC_APPLAUNCHER")
                                             id: tileProps['d:id'][0]
@@ -73,9 +60,9 @@ groups.getUserGroups = function(req, res) {
                                        curTile.isDoubleHeight = curTile.configuration.row > 1;
                                        curTile.icon =  '/images/index/main/apps/NewsImage11.png';
                                        curTile.refreshInterval = curTile.configuration['service_refresh_interval'];
-                                       curTile.realIcon = matchTileIcon(curTile.configuration['display_icon_url']); //"glyphicon glyphicon-cog"; // sap-icon://action-settings
-                                       curTile.navigationTargetUrl = curTile.configuration['navigation_target_url']; //link to application
-                                       curTile.serviceURL = curTile.configuration['service_url']; //dynamic tile data url retrieval
+                                       curTile.realIcon = matchTileIcon(curTile.configuration['display_icon_url']);
+                                       curTile.navigationTargetUrl = curTile.configuration['navigation_target_url'];
+                                       curTile.serviceURL = curTile.configuration['service_url'];
 
                                        //Try to build working app url
                                        curTile.navUrl = undefined;
@@ -166,7 +153,7 @@ groups.getUserGroups = function(req, res) {
             }
         }
         return res;
-    }
+    };
 
     var getEmptyTile = function(){
         return {
@@ -176,7 +163,7 @@ groups.getUserGroups = function(req, res) {
             icon: '/images/index/main/apps/plusSign.png',
             type: -1
         };
-    }
+    };
 
     var getDynamicData = function(curTile){
 
@@ -186,15 +173,14 @@ groups.getUserGroups = function(req, res) {
                         var bodyChunks = [];
                         response.on('data', function(chunk) {
                             bodyChunks.push(chunk);
-                        })
+                        });
                         response.on('end', function() {
                             var body = Buffer.concat(bodyChunks);
                             this.dynamicData = body.toString();
-                            console.log('YASMEENNNNNN '+ this.dynamicData);
                         });
                     }.bind(curTile))
                 }
-    }
+    };
 
     var matchTileIcon = function(fontName){
 
@@ -219,10 +205,9 @@ groups.getUserGroups = function(req, res) {
                 return 'glyphicon glyphicon-eye-close';
         }
     }
-}
+};
 
 module.exports = function(opts) {
-    console.log(opts);
     if(opts) {
         if(opts.fiori) {
             var url = opts.fiori.split(':');
