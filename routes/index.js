@@ -20,7 +20,8 @@ exports.get = function(req, res){
             '/stylesheets/themes/' + theme + '/index/login/login.css',
             '/stylesheets/themes/' + theme + '/index/main/main.css',
             '/stylesheets/themes/' + theme + '/index/main/home/home.css',
-            '/stylesheets/themes/' + theme + '/index/main/apps/apps.css'
+            '/stylesheets/themes/' + theme + '/index/main/apps/apps.css',
+            '/stylesheets/themes/' + theme + '/index/main/todos/todos.css'
         ],
         javascripts: [
             // Libs
@@ -53,6 +54,8 @@ exports.get = function(req, res){
             // Todos
             '/javascripts/index/main/todos/todos-module.js',
             '/javascripts/index/main/todos/controllers/todos-controller.js',
+            '/javascripts/index/main/todos/services/todos-feed-service.js',
+            '/javascripts/index/main/todos/directives/todos-item-directive.js',
             // Notifications
             '/javascripts/index/main/notifications/notifications-module.js',
             '/javascripts/index/main/notifications/controllers/notifications-controller.js',

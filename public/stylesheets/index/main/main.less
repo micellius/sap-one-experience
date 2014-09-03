@@ -332,6 +332,7 @@
           border-radius: 0;
           margin: @panel-body-padding/2 @panel-body-padding/2 0 0;
           width: (@sap-gallery-popover-width - @panel-body-padding)/2 - 6px;
+          cursor: pointer;
           .glyphicon {
             margin-right: @padding-base-horizontal;
           }
@@ -348,6 +349,24 @@
     left: auto;
     right: @sap-logo-margin + @navbar-height*5.45 - @sap-notifications-popover-width/2;
     width: @sap-notifications-popover-width;
+    .popover-content {
+      padding: 0;
+      .list-group {
+        margin: 0;
+        color: inherit;
+        padding-left: @panel-body-padding/2;
+        padding-bottom: @panel-body-padding/2;
+        .list-group-item {
+          display: inline-block;
+          border-radius: 0;
+          margin: @panel-body-padding/2 @panel-body-padding/2 0 0;
+          width: @sap-notifications-popover-width - @panel-body-padding - 4px;
+          .glyphicon {
+            margin-right: @padding-base-horizontal;
+          }
+        }
+      }
+    }
   }
 
 }

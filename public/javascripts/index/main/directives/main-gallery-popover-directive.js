@@ -12,7 +12,7 @@
                     '<h3 class="popover-title">{{msg.title}}</h3>' +
                     '<div class="popover-content">' +
                         '<ul class="list-group">' +
-                            '<li class="list-group-item" ng-repeat="item in items">' +
+                            '<li class="list-group-item ng-class:{\'active\':item.active}" ng-repeat="item in items" ng-click="item.active = !item.active">' +
                                 '<i class="glyphicon glyphicon-{{getIcon(item)}}"></i>' +
                                 '<span>{{item.name}}</span>' +
                             '</li>' +

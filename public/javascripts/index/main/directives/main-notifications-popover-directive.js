@@ -10,8 +10,8 @@
                 '<div class="popover bottom sap-notifications-popover">' +
                     '<div class="arrow"></div>' +
                     '<div class="popover-content">' +
-                        '<ul class="sap-notifications-list">' +
-                            '<li ng-repeat="item in items">{{item.title}}</li>' +
+                        '<ul class="sap-notifications-list list-group">' +
+                            '<li class="list-group-item" ng-repeat="item in items">{{item.title}}</li>' +
                         '</ul>' +
                     '</div>' +
                 '</div>',
