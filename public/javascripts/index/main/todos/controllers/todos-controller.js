@@ -7,7 +7,7 @@
     function sapTodosController($scope, sapSharedGalleryService, sapTodosFeedService) {
         sapSharedGalleryService.setItems([]);
 
-        sapTodosFeedService.promise.success(function() {
+        sapTodosFeedService.promise.success(function () {
             $scope.items = sapTodosFeedService.getTodos();
         });
     }
