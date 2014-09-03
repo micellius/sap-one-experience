@@ -21,7 +21,9 @@ var opts = stdio.getopt({
     'mock': { description: 'Force services to return mock data' },
     'port': { args: 1, description: 'Port to be used by Express (e.g. 3000)' },
     'proxy': { args: 1, description: 'Proxy server URL (e.g. http://proxy:1234)' },
-    'site': { args: 1, description: 'HANA Cloud Portal site JSON URL (e.g. http://www.my-site.com:1234/portal/v1/sites/1919e4a3-9322-4cbd-bbae-8f291b49eceb)' }
+    'site': { args: 1, description: 'HANA Cloud Portal site JSON URL (e.g. http://www.my-site.com:1234/portal/v1/sites/1919e4a3-9322-4cbd-bbae-8f291b49eceb)' },
+    'fiori': { args: 1, description: 'Fiori oDATA service URL (e.g. https://host:port)'},
+    'fioriAuth': { args: 1, description: 'Fiori oDATA service credentials (e.g. username:password)'}
 });
 var authenticationService = require('./services/authentication.js')(opts);
 var themeService = require('./services/theme.js')(opts);
@@ -30,6 +32,7 @@ var notificationService = require('./services/notification.js')(opts);
 var todoService = require('./services/todo.js')(opts);
 var analyticService = require('./services/analytic.js')(opts);
 var documentService = require('./services/document.js')(opts);
+var groupService = require('./services/group.js')(opts);
 
 
 app.set('port', opts.port || 3000);
@@ -87,6 +90,7 @@ app.post('/api/login', authenticationService.login);
 app.post('/api/logout', authenticationService.logout);
 app.get('/api/home/widgets', homeService.getWidgets);
 app.get('/api/home/widget/:widgetId/document/:documentId', homeService.getWidget);
+app.get('/api/groups', groupService.getUserGroups);
 app.get('/api/notifications', notificationService.getNotifications);
 app.get('/api/todos', todoService.getTodos);
 app.get('/api/reports', analyticService.getReports);
