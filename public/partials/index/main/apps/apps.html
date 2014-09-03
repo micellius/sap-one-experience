@@ -1,3 +1,48 @@
-<div class="sap-apps">
+<div id="groups" class="sap-apps">
 
+    <ul class="user-groups">
+        <li ng-repeat="group in userGroups" class="sap-li-group">
+            <h2 class="sap-group">{{group.title}}</h2>
+           <!-- <div ng-repeat="tile in group.tiles" class="sap-tile" ng-class="{'sap-news-background sap-double-width': tile.isNews, 'sap-double-width': tile.isDoubleWidth, 'sap-double-height': tile.isDoubleHeight}">-->
+
+            <div ng-repeat="tile in group.tiles" ng-switch="tile.type">
+                 <!-- News Tile-->
+               <!-- <div ng-switch-when="0" class="sap-tile sap-news-background sap-double-width" ng-class="{'sap-double-width': tile.isDoubleWidth, 'sap-double-height': tile.isDoubleHeight}">
+                    <a href="{{tile.navUrl}}" target="_blank" onclick="return false" class="sap-tile-nav" ng-class="{'sap-tile-non-nav': tile.navUrl}" > -->
+                <div ng-switch-when="0">
+                    <a href="{{tile.navUrl}}" target="_blank" onclick="return false" class="sap-tile sap-news-background sap-double-width" ng-class="{'sap-double-width': tile.isDoubleWidth, 'sap-double-height': tile.isDoubleHeight}" >
+                        <h3 class="sap-tile-title">{{tile.title}}</h3>
+                        <div class="sap-news-inner"><div class="sap-news-inner-text">No articles to display</div></div>
+                     </a>
+                </div>
+                <!-- Dynamic Tile-->
+                <!--<div ng-switch-when="1" class="sap-tile" ng-class="{'sap-double-width': tile.isDoubleWidth, 'sap-double-height': tile.isDoubleHeight}">
+                    <a href="{{tile.navUrl}}" target="_blank" class="sap-tile-nav" ng-class="{'sap-tile-non-nav': tile.navUrl}" >-->
+                <div ng-switch-when="1">
+                    <a href="{{tile.navUrl}}" target="_blank" class="sap-tile" ng-class="{'sap-double-width': tile.isDoubleWidth, 'sap-double-height': tile.isDoubleHeight}">
+                        <h3 class="sap-tile-title">{{tile.title}}</h3>
+                        <h4 class="sap-tile-description" >{{tile.description}}</h4>
+                        <!--<img ng-src="{{tile.icon}}" class="sap-static-icon"/>-->
+                        <i class="{{tile.realIcon}} sap-new-static"></i>
+                        <div class="sap-dynamic-number" >{{tile.dynamicData}}</div>
+                    </a>
+                </div>
+                <!-- Static Tile-->
+                <!--<div ng-switch-when="2" class="sap-tile" ng-class="{'sap-double-width': tile.isDoubleWidth, 'sap-double-height': tile.isDoubleHeight}">
+                    <a href="{{tile.navUrl}}" target="_blank" class="sap-tile-nav" ng-class="{'sap-tile-non-nav': tile.navUrl}" >-->
+                <div ng-switch-when="2">
+                    <a href="{{tile.navUrl}}" target="_blank" class="sap-tile" ng-class="{'sap-double-width': tile.isDoubleWidth, 'sap-double-height': tile.isDoubleHeight}" >
+                        <h3 class="sap-tile-title">{{tile.title}}</h3>
+                        <h4 class="sap-tile-description" >{{tile.description}}</h4>
+                        <!--<img ng-src="{{tile.icon}}" class="sap-static-icon"/>-->
+                        <i class="{{tile.realIcon}} sap-new-static"></i>
+                    </a>
+                </div>
+                <!-- Empty Tile-->
+                <div ng-switch-when="-1" class="sap-tile sap-empty-tile">
+                    <i class="glyphicon glyphicon-plus-sign sap-empty-tile"></i>
+                </div>
+           </div>
+        </li>
+    </ul>
 </div>

@@ -7,7 +7,8 @@
         sapMainPagesService,
         sapSharedAuthenticationService,
         sapSharedI18nService,
-        sapSharedThemeService
+        sapSharedThemeService,
+        sapSharedGroupService
     ) {
 
         $scope.msg = sapSharedI18nService.getMessages('main');
@@ -19,9 +20,17 @@
         $scope.isUserPopoverVisible = false;
         $scope.isLanguagePopoverVisible = false;
 
+        this.updateBindings = function(){
+            $scope.$apply();
+        };
+
+        $scope.userGroups = sapSharedGroupService.getGroups(this.updateBindings);
+
         $scope.$on('sapSharedI18nService.localeChanged', function () {
             $scope.msg = sapSharedI18nService.getMessages('main');
         });
+
+
 
         this.toggleSideBar = function () {
             $scope.sidebarMode = ($scope.sidebarMode === 'toggle' ? '' : 'toggle');
@@ -51,6 +60,7 @@
             'sapSharedAuthenticationService',
             'sapSharedI18nService',
             'sapSharedThemeService',
+            'sapSharedGroupService',
             sapMainController
         ]);
 

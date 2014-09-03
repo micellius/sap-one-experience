@@ -20,9 +20,12 @@ var app = express();
 var stdio = require('stdio');
 var opts = stdio.getopt({
     'proxy': { args: 1, description: 'Proxy server URL (e.g. http://proxy:1234)' },
-    'site': { args: 1, description: 'HANA Cloud Portal site JSON URL (e.g. http://www.my-site.com:1234/portal/v1/sites/1919e4a3-9322-4cbd-bbae-8f291b49eceb)' }
+    'site': { args: 1, description: 'HANA Cloud Portal site JSON URL (e.g. http://www.my-site.com:1234/portal/v1/sites/1919e4a3-9322-4cbd-bbae-8f291b49eceb)' },
+    'fiori': { args: 1, description: 'Fiori oDATA service URL (e.g. https://host:port)'},
+    'fioriAuth': { args: 1, description: 'Fiori oDATA service credentials (e.g. username:password)'}
 });
 var homeService = require('./services/home.js')(opts);
+var groupService = require('./services/group.js')(opts);
 
 
 app.set('port', 3000);
@@ -77,6 +80,7 @@ app.get('/api/themes', themeService.getThemes);
 app.post('/api/login', authenticationService.login);
 app.post('/api/logout', authenticationService.logout);
 app.get('/api/home', homeService.getHome);
+app.get('/api/groups', groupService.getUserGroups);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
