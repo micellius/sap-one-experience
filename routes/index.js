@@ -37,6 +37,7 @@ exports.get = function(req, res){
             '/javascripts/shared/services/shared-css-service.js',
             '/javascripts/shared/services/shared-gallery-service.js',
             '/javascripts/shared/services/shared-notifications-service.js',
+            '/javascripts/shared/services/shared-group-service.js',
             '/javascripts/shared/directives/shared-dropdown-directive.js',
             '/javascripts/shared/filters/shared-translate-filter.js',
             // Login
