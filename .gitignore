@@ -4,3 +4,9 @@
 
 # WebStorm files
 .idea
+
+# Sources, dependencies, temporary files
+bower_components
+dist
+node_modules
+public
