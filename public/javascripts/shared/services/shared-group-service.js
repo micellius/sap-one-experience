@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    function sapSharedGroupService($http, $window, $rootScope) {
+    function sapSharedGroupService($http) {
 
         var groups = [];
 
@@ -17,12 +17,9 @@
             for (i = 0, l = results.length; i < l; i++) {
                 groups.push(results[i]);
             }
-            });
+        });
 
-        this.getGroups = function (cb) {
-//            setTimeout(function(){
-//                this();
-//            }.bind(cb),8000);
+        this.getGroups = function () {
             return groups;
         };
     }
@@ -31,8 +28,6 @@
         module('sapShared').
         service('sapSharedGroupService', [
             '$http',
-            '$window',
-            '$rootScope',
             sapSharedGroupService
         ]);
 
