@@ -21,7 +21,7 @@
         $scope.isLanguagePopoverVisible = false;
         $scope.isGalleryPopoverVisible = false;
 
-        this.updateBindings = function(){
+        this.updateBindings = function () {
             $scope.$apply();
         };
 
