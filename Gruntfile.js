@@ -99,7 +99,7 @@ module.exports = function(grunt) {
                     rootpath: '../',
                     compress: true,
                     ieCompat: false,
-                    preprocess: function(src, path) {
+                    preprocess: function(src) {
                         return '@import "public/stylesheets/themes/default/less/variables.less";\n'+ src;
                     }
                 },
@@ -107,7 +107,11 @@ module.exports = function(grunt) {
                     'public/stylesheets/themes/default/index/login/login.css': 'public/stylesheets/index/login/login.less',
                     'public/stylesheets/themes/default/index/main/main.css': 'public/stylesheets/index/main/main.less',
                     'public/stylesheets/themes/default/index/main/home/home.css': 'public/stylesheets/index/main/home/home.less',
-                    'public/stylesheets/themes/default/index/main/apps/apps.css': 'public/stylesheets/index/main/apps/apps.less'
+                    'public/stylesheets/themes/default/index/main/apps/apps.css': 'public/stylesheets/index/main/apps/apps.less',
+                    'public/stylesheets/themes/default/index/main/todos/todos.css': 'public/stylesheets/index/main/todos/todos.less',
+                    'public/stylesheets/themes/default/index/main/notifications/notifications.css': 'public/stylesheets/index/main/notifications/notifications.less',
+                    'public/stylesheets/themes/default/index/main/analytics/analytics.css': 'public/stylesheets/index/main/analytics/analytics.less',
+                    'public/stylesheets/themes/default/index/main/documents/documents.css': 'public/stylesheets/index/main/documents/documents.less'
                 }
             }
         },
@@ -168,7 +172,7 @@ module.exports = function(grunt) {
             }
         },
         'string-replace': {
-            dist: {
+            css: {
                 options: {
                     replacements: [{
                         pattern: /\(\/images\//gm,
@@ -177,6 +181,17 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'dist/stylesheets/<%= pkg.name %>-<%= pkg.version %>.min.css': 'dist/stylesheets/<%= pkg.name %>-<%= pkg.version %>.min.css'
+                }
+            },
+            js: {
+                options: {
+                    replacements: [{
+                        pattern: /\.post\(/gm,
+                        replacement: '.get('
+                    }]
+                },
+                files: {
+                    'dist/javascripts/<%= pkg.name %>-<%= pkg.version %>.min.js': 'dist/javascripts/<%= pkg.name %>-<%= pkg.version %>.min.js'
                 }
             }
         },
