@@ -4,9 +4,10 @@
         <nav class="navbar navbar-default" role="navigation">
             <a class="navbar-brand" tabindex="-1"><i class="glyphicon glyphicon-th-list icon" ng-click="controller.toggleSideBar()"></i> {{msg.title}}</a>
             <div class="pull-right">
+                <button sap-main-gallery-button-directive ng-click="controller.toggleGalleryPopover()" ng-attr-title="{{msg.gallerySwitch}}"></button>
                 <span class="sap-separator"></span>
-                <button sap-main-language-button-directive ng-click="controller.toggleLanguagePopover()"></button>
-                <button sap-main-user-button-directive ng-click="controller.toggleUserPopover()"></button>
+                <button sap-main-language-button-directive ng-click="controller.toggleLanguagePopover()" ng-attr-title="{{msg.languageSwitch}}"></button>
+                <button sap-main-user-button-directive ng-click="controller.toggleUserPopover()" ng-attr-title="{{msg.userProfile}}"></button>
                 <img src="images/shared/logo.png" alt="SAP" class="sap-logo"/>
             </div>
         </nav>
@@ -19,4 +20,5 @@
     <main class="sap-page-main {{sidebarMode}}" ng-include="'partials/index/main/' + currentPage.name + '/' + currentPage.name + '.html'"></main>
     <div ng-if="isUserPopoverVisible" sap-main-user-popover-directive></div>
     <div ng-if="isLanguagePopoverVisible" sap-main-language-popover-directive></div>
+    <div ng-if="isGalleryPopoverVisible" sap-main-gallery-popover-directive></div>
 </div>

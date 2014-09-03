@@ -73,7 +73,10 @@
                         "analytics": "Analytics",
                         "documents": "Documents",
                         "theme": "Theme",
-                        "logout": "Logout"
+                        "logout": "Logout",
+                        "languageSwitch": "Language",
+                        "userProfile": "User profile",
+                        "gallerySwitch": "Galley"
                     }
                 },
                 "ru": {
@@ -99,7 +102,10 @@
                         "analytics": "Аналитика",
                         "documents": "Документы",
                         "theme": "Тема",
-                        "logout": "Выйти"
+                        "logout": "Выйти",
+                        "languageSwitch": "Язык",
+                        "userProfile": "Профиль пользователя",
+                        "gallerySwitch": "Галлерея"
                     }
                 }
             };

@@ -19,6 +19,7 @@
         $scope.themes = sapSharedThemeService.getThemes();
         $scope.isUserPopoverVisible = false;
         $scope.isLanguagePopoverVisible = false;
+        $scope.isGalleryPopoverVisible = false;
 
         this.updateBindings = function(){
             $scope.$apply();
@@ -42,6 +43,10 @@
 
         this.toggleLanguagePopover = function () {
             $scope.isLanguagePopoverVisible = !$scope.isLanguagePopoverVisible;
+        };
+
+        this.toggleGalleryPopover = function () {
+            $scope.isGalleryPopoverVisible = !$scope.isGalleryPopoverVisible;
         };
 
         this.logout = function () {
