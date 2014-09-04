@@ -1,14 +1,19 @@
 language: node_js
 node_js:
-  - "0.10"
+- '0.10'
 branches:
   only:
-    - master
+  - master
 before_install:
-  - npm install -g bower
-  - npm install -g grunt-cli
+- npm install -g bower
+- npm install -g grunt-cli
 install:
-  - npm install
-  - bower install
+- npm install
+- bower install
 before_script:
-  - grunt
+- grunt build
+after_success:
+- grunt gh-pages:travis
+env:
+  global:
+    secure: RebWZewNxLhhY9wQwtUiJQTHKyl4giqwB0fbL1TEUHYjGBgzd7qwiuWu/+cwxoiXYVfiPmiW0XfilkdQ5WLPJLta4MO3++DI3YMqZHL2i9MtibKMGIQ0nQ476dTGTfe9CSHIs6qRj/Eh9MEWYX7qXFrEs/jLd1FGsxui1WSzAr8=

@@ -15,4 +15,5 @@ node_modules
 public/stylesheets/themes/*/*/*/
 
 # Build results
+.grunt
 dist

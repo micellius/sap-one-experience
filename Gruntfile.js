@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        clean: ['dist'],
+        clean: ['.grunt', 'dist'],
         jslint: {
             client: {
                 src: ['public/javascripts/**/*.js'],
@@ -121,8 +121,7 @@ module.exports = function(grunt) {
                     'dist/stylesheets/<%= pkg.name %>-<%= pkg.version %>.min.css': [
                         'public/stylesheets/themes/default/index/login/login.css',
                         'public/stylesheets/themes/default/index/main/main.css',
-                        'public/stylesheets/themes/default/index/main/home/home.css',
-                        'public/stylesheets/themes/default/index/main/apps/apps.css'
+                        'public/stylesheets/themes/default/index/main/*/*.css'
                     ]
                 }
             }
@@ -237,6 +236,24 @@ module.exports = function(grunt) {
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 }
             }
+        },
+        'gh-pages': {
+            local: {
+                options: {
+                    base: 'dist',
+                    message: 'Generate gh-pages with Grunt task gh-pages:local'
+                },
+                src: ['**']
+            },
+            travis: {
+                options: {
+                    repo: 'https://' + process.env.GH_TOKEN + '@github.com/micellius/sap-one-experience.git',
+                    base: 'dist',
+                    message: 'Generate gh-pages with Grunt task gh-pages:travis',
+                    silent: true
+                },
+                src: ['**']
+            }
         }
     });
 
@@ -249,8 +266,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-string-replace');
     grunt.loadNpmTasks('grunt-file-creator');
+    grunt.loadNpmTasks('grunt-gh-pages');
 
-    grunt.registerTask('default', [
+    grunt.registerTask('build', [
         'jslint',
         'clean',
         'closurecompiler',
@@ -261,5 +279,7 @@ module.exports = function(grunt) {
         'string-replace',
         'file-creator'
     ]);
+    grunt.registerTask('publish', ['gh-pages:local']);
+    grunt.registerTask('default', ['build']);
 
 };
