@@ -13,8 +13,8 @@ install:
 before_script:
 - grunt build
 after_success:
-- git set user.name "Travis CI"
-- git set user.email "travis@localhost.localdomain"
+- git config set user.name "Travis CI"
+- git config set user.email "travis@localhost.localdomain"
 - grunt gh-pages:travis
 env:
   global:
