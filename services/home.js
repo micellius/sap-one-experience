@@ -88,7 +88,7 @@ home.getWidgets = function (req, res) {
                                 JSON.parse(fixJson(property.value)).contentType : 'video';
                             return {
                                 widgetId: app.ID,
-                                documentId: app.ecmIds || property.value,
+                                documentId: app.ecmIds || property.value.split('/').pop(),
                                 contentType: contentType,
                                 name: app.name,
                                 layout: pages[app.containerID][app.ID]
@@ -175,8 +175,8 @@ mock.getWidgets = function (req, res) {
                 }
             }, {
                 "widgetId": "wid4",
-                "documentId": "did4",
-                "contentType": "video/mp4",
+                "documentId": "9DbLd0Hp9Ac",
+                "contentType": "video",
                 "name": "Video Widget",
                 "layout": {
                     "top": 13,

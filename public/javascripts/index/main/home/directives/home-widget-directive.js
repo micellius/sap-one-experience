@@ -47,6 +47,8 @@
                         scope.widget.content = $sce.trustAsHtml('<object class="sap-home-widget-content" type="' + scope.widget.contentType + '" data="' + url + '"></object>');
                         break;
                     case 'video':
+                        url = 'https://www.youtube.com/embed/' + scope.widget.documentId;
+                        scope.widget.content = $sce.trustAsHtml('<iframe class="sap-home-widget-content" src="' + url + '"></iframe>');
                         break;
                     }
                 }
