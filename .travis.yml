@@ -16,4 +16,4 @@ after_success:
 - grunt gh-pages:travis
 env:
   global:
-    secure: RebWZewNxLhhY9wQwtUiJQTHKyl4giqwB0fbL1TEUHYjGBgzd7qwiuWu/+cwxoiXYVfiPmiW0XfilkdQ5WLPJLta4MO3++DI3YMqZHL2i9MtibKMGIQ0nQ476dTGTfe9CSHIs6qRj/Eh9MEWYX7qXFrEs/jLd1FGsxui1WSzAr8=
+    secure: "RebWZewNxLhhY9wQwtUiJQTHKyl4giqwB0fbL1TEUHYjGBgzd7qwiuWu/+cwxoiXYVfiPmiW0XfilkdQ5WLPJLta4MO3++DI3YMqZHL2i9MtibKMGIQ0nQ476dTGTfe9CSHIs6qRj/Eh9MEWYX7qXFrEs/jLd1FGsxui1WSzAr8="
