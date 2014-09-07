@@ -260,7 +260,7 @@ module.exports = function(grunt) {
                         name: 'Travis CI',
                         email: 'travis@localhost.localdomain'
                     },
-                    silent: false
+                    silent: true
                 },
                 src: ['**']
             }
