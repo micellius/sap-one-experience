@@ -256,6 +256,10 @@ module.exports = function(grunt) {
                     repo: 'https://' + process.env.GH_TOKEN + '@github.com/micellius/sap-one-experience.git',
                     base: 'dist',
                     message: 'Generate gh-pages with Grunt task gh-pages:travis',
+                    user: {
+                        name: 'Travis CI',
+                        email: 'travis@localhost.localdomain'
+                    },
                     silent: false
                 },
                 src: ['**']
