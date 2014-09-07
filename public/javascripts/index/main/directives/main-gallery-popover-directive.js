@@ -30,7 +30,7 @@
                         return 'font';
                     case 'image':
                         return 'picture';
-                    case 'document':
+                    case 'application':
                         return 'file';
                     case 'video':
                         return 'facetime-video';

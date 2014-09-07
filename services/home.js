@@ -3,6 +3,8 @@
  */
 
 var request = require('request');
+var fs = require('fs');
+var path = require('path');
 var home = {};
 var mock = {};
 var siteUrl = '';
@@ -79,12 +81,14 @@ home.getWidgets = function (req, res) {
                             }
                         });
                         apps = body.site.apps.map(function (app) {
-                            var contentType = JSON.parse(fixJson(app.globalProperties.filter(function(property) {
-                                return property.key === 'ecm';
-                            })[0].value)).contentType;
+                            var property = app.globalProperties.filter(function(property) {
+                                return property.key === 'ecm' || property.key === 'video-url';
+                            })[0];
+                            var contentType = property.key === 'ecm' ?
+                                JSON.parse(fixJson(property.value)).contentType : 'video';
                             return {
                                 widgetId: app.ID,
-                                documentId: app.ecmIds,
+                                documentId: app.ecmIds || property.value,
                                 contentType: contentType,
                                 name: app.name,
                                 layout: pages[app.containerID][app.ID]
@@ -136,7 +140,7 @@ mock.getWidgets = function (req, res) {
             {
                 "widgetId": "wid1",
                 "documentId": "did1",
-                "contentType": "text/plain",
+                "contentType": "text/html",
                 "name": "Text Widget",
                 "layout": {
                     "top": 2,
@@ -160,13 +164,13 @@ mock.getWidgets = function (req, res) {
             }, {
                 "widgetId": "wid3",
                 "documentId": "did3",
-                "contentType": "document/pdf",
+                "contentType": "application/pdf",
                 "name": "Document Widget",
                 "layout": {
-                    "top": 13,
-                    "left": 2,
-                    "width": 10,
-                    "height": 20,
+                    "top": 24,
+                    "left": 29,
+                    "width": 31,
+                    "height": 9,
                     "showFrameArea": true
                 }
             }, {
@@ -176,7 +180,7 @@ mock.getWidgets = function (req, res) {
                 "name": "Video Widget",
                 "layout": {
                     "top": 13,
-                    "left": 13,
+                    "left": 2,
                     "width": 26,
                     "height": 20,
                     "showFrameArea": true
@@ -193,9 +197,31 @@ mock.getWidgets = function (req, res) {
 };
 
 mock.getWidget = function (req, res) {
-    var data = 'Hello';
+    var data = '',
+        dataType;
 
     if(arguments.length) {
+        dataType = JSON.parse(mock.getWidgets()).results.filter(function(item) {
+            return item.widgetId === req.params.widgetId
+        })[0].contentType;
+        switch(dataType) {
+            case 'text/html':
+                data = '<h1>Hello</h1><p style="color:red;background:#ffff00;">This text is red</p>';
+                break;
+            case 'image/png':
+                data = fs.readFileSync(path.join(__dirname, '..', 'public', 'images', 'shared', 'logo.png'));
+                break;
+            case 'application/pdf':
+                data = fs.readFileSync(path.join(__dirname, '..', 'public', 'images', 'shared', 'pdf.pdf'));
+                break;
+            case 'video/mp4':
+                break;
+        }
+    } else {
+        data = 'Hello';
+    }
+
+    if(arguments.length > 1) {
         res.end(data);
     } else {
         return data;

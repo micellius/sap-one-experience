@@ -211,12 +211,18 @@ module.exports = function(grunt) {
                 "dist/api/home/widgets": function (fs, fd, done) {
                     var data = homeService.getWidgets();
                     fs.mkdirSync("dist/api/home/widget");
-                    fs.mkdirSync("dist/api/home/widget/wid");
-                    fs.mkdirSync("dist/api/home/widget/wid/document");
-                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
-                },
-                "dist/api/home/widget/wid/document/did": function (fs, fd, done) {
-                    var data = homeService.getWidget();
+                    JSON.parse(data).results.forEach(function(item) {
+                        fs.mkdirSync("dist/api/home/widget/" + item.widgetId);
+                        fs.mkdirSync("dist/api/home/widget/" + item.widgetId + "/document");
+                        fs.writeFileSync(
+                            "dist/api/home/widget/" + item.widgetId + "/document/" + item.documentId,
+                            homeService.getWidget({
+                                params: {
+                                    widgetId: item.widgetId
+                                }
+                            })
+                        );
+                    });
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 },
                 "dist/api/notifications": function (fs, fd, done) {

@@ -19,6 +19,7 @@
                 widget: '=sapHomeWidgetDirective'
             },
             link: function (scope) {
+                var url;
                 // Layout
                 if (!scope.widget.css) {
                     scope.widget.css = sapHomeLayoutService.getWidgetCss(scope.widget.layout);
@@ -35,12 +36,17 @@
                             });
                         break;
                     case 'image':
-                        var url = sapHomeWidgetsService.getWidgetContentUrl(scope.widget.widgetId, scope.widget.documentId);
-                        //scope.widget.content = $sce.trustAsHtml('<img src="' + url + '" />');
+                        url = sapHomeWidgetsService.getWidgetContentUrl(scope.widget.widgetId, scope.widget.documentId);
                         scope.widget.content = $sce.trustAsHtml('<div class="sap-home-widget-content"></div>');
                         sapSharedCssService.setStyle('#widget-' + scope.widget.widgetId + ' .sap-home-widget-content', {
                             'background-image': 'url(' + url + ')'
                         });
+                        break;
+                    case 'application':
+                        url = sapHomeWidgetsService.getWidgetContentUrl(scope.widget.widgetId, scope.widget.documentId);
+                        scope.widget.content = $sce.trustAsHtml('<object class="sap-home-widget-content" type="' + scope.widget.contentType + '" data="' + url + '"></object>');
+                        break;
+                    case 'video':
                         break;
                     }
                 }
