@@ -4,7 +4,16 @@
 (function () {
     'use strict';
 
-    function sapAppsController(sapSharedGalleryService, sapSharedI18nService) {
+    function sapAppsController(
+        $scope,
+        sapSharedGalleryService,
+        sapSharedI18nService,
+        sapAppsGroupsService
+    ) {
+        $scope.userGroups = sapAppsGroupsService.getGroups(function () {
+            $scope.$apply();
+        });
+
         sapSharedGalleryService.setMessages({
             title: sapSharedI18nService.translate('appsGalleryTitle')
         });
@@ -20,8 +29,10 @@
     angular.
         module('sapApps').
         controller('sapAppsController', [
+            '$scope',
             'sapSharedGalleryService',
             'sapSharedI18nService',
+            'sapAppsGroupsService',
             sapAppsController
         ]);
 }());

@@ -37,7 +37,6 @@ exports.get = function(req, res){
             '/javascripts/shared/services/shared-css-service.js',
             '/javascripts/shared/services/shared-gallery-service.js',
             '/javascripts/shared/services/shared-notifications-service.js',
-            '/javascripts/shared/services/shared-group-service.js',
             '/javascripts/shared/directives/shared-dropdown-directive.js',
             '/javascripts/shared/filters/shared-translate-filter.js',
             // Login
@@ -52,6 +51,7 @@ exports.get = function(req, res){
             // Apps
             '/javascripts/index/main/apps/apps-module.js',
             '/javascripts/index/main/apps/controllers/apps-controller.js',
+            '/javascripts/index/main/apps/services/apps-groups-service.js',
             // Todos
             '/javascripts/index/main/todos/todos-module.js',
             '/javascripts/index/main/todos/controllers/todos-controller.js',

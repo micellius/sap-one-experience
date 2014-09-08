@@ -1,10 +1,10 @@
 /**
- * Created by i69489 on 27/8/14.
+ * Created by i070970 on 9/8/14.
  */
 (function () {
     'use strict';
 
-    function sapSharedGroupService($http) {
+    function sapAppsGroupsService($http) {
 
         var groups = [];
 
@@ -25,10 +25,10 @@
     }
 
     angular.
-        module('sapShared').
-        service('sapSharedGroupService', [
+        module('sapApps').
+        service('sapAppsGroupsService', [
             '$http',
-            sapSharedGroupService
+            sapAppsGroupsService
         ]);
 
 }());
