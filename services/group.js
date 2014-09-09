@@ -210,10 +210,10 @@ groups.getUserGroups = function(req, res) {
 module.exports = function(opts) {
     if(opts) {
         if(opts.fiori) {
-            var url = opts.fiori.split(':');
+            var url = opts.fiori.split('//')[1].split(':');
             host = url[0];
             port = url[1];
-            origin = 'https://' + url;
+            origin = opts.fiori;
         }
         if(opts.fioriAuth) {
             auth = opts.fioriAuth;

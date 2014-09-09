@@ -33,6 +33,7 @@ var todoService = require('./services/todo.js')(opts);
 var analyticService = require('./services/analytic.js')(opts);
 var documentService = require('./services/document.js')(opts);
 var groupService = require('./services/group.js')(opts);
+var appService = require('./services/app.js')(opts);
 
 
 app.set('port', opts.port || 3000);
@@ -90,6 +91,7 @@ app.post('/api/login', authenticationService.login);
 app.post('/api/logout', authenticationService.logout);
 app.get('/api/home/widgets', homeService.getWidgets);
 app.get('/api/home/widget/:widgetId/document/:documentId', homeService.getWidget);
+app.get('/api/apps/groups', appService.getGroups);
 app.get('/api/groups', groupService.getUserGroups);
 app.get('/api/notifications', notificationService.getNotifications);
 app.get('/api/todos', todoService.getTodos);
