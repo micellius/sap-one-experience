@@ -10,7 +10,7 @@
 
         $http({
             method: 'GET',
-            url: 'api/groups'
+            url: 'api/apps/groups'
         }).success(function (data) {
             var i, l, results;
             results = data.results;

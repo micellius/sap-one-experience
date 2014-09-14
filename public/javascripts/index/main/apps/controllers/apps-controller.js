@@ -10,9 +10,7 @@
         sapSharedI18nService,
         sapAppsGroupsService
     ) {
-        $scope.userGroups = sapAppsGroupsService.getGroups(function () {
-            $scope.$apply();
-        });
+        $scope.groups = sapAppsGroupsService.getGroups();
 
         sapSharedGalleryService.setMessages({
             title: sapSharedI18nService.translate('appsGalleryTitle')

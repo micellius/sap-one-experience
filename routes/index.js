@@ -52,6 +52,8 @@ exports.get = function(req, res){
             '/javascripts/index/main/apps/apps-module.js',
             '/javascripts/index/main/apps/controllers/apps-controller.js',
             '/javascripts/index/main/apps/services/apps-groups-service.js',
+            '/javascripts/index/main/apps/directives/apps-group-directive.js',
+            '/javascripts/index/main/apps/directives/apps-tile-directive.js',
             // Todos
             '/javascripts/index/main/todos/todos-module.js',
             '/javascripts/index/main/todos/controllers/todos-controller.js',
