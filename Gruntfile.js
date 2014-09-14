@@ -6,6 +6,7 @@ var notificationsService = require('./services/notification.js')(opts);
 var todoService = require('./services/todo.js')(opts);
 var analyticService = require('./services/analytic.js')(opts);
 var documentService = require('./services/document.js')(opts);
+var appService = require('./services/app.js')(opts);
 
 module.exports = function(grunt) {
 
@@ -223,6 +224,10 @@ module.exports = function(grunt) {
                             })
                         );
                     });
+                    fs.write(fd, new Buffer(data), 0, data.length, 0, done);
+                },
+                "dist/api/apps/groups": function (fs, fd, done) {
+                    var data = appService.getGroups();
                     fs.write(fd, new Buffer(data), 0, data.length, 0, done);
                 },
                 "dist/api/notifications": function (fs, fd, done) {
