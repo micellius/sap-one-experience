@@ -21,7 +21,10 @@ exports.get = function(req, res){
             '/stylesheets/themes/' + theme + '/index/main/main.css',
             '/stylesheets/themes/' + theme + '/index/main/home/home.css',
             '/stylesheets/themes/' + theme + '/index/main/apps/apps.css',
-            '/stylesheets/themes/' + theme + '/index/main/todos/todos.css'
+            '/stylesheets/themes/' + theme + '/index/main/todos/todos.css',
+            '/stylesheets/themes/' + theme + '/index/main/notifications/notifications.css',
+            '/stylesheets/themes/' + theme + '/index/main/analytics/analytics.css',
+            '/stylesheets/themes/' + theme + '/index/main/documents/documents.css'
         ],
         javascripts: [
             // Libs
