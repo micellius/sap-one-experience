@@ -9,7 +9,7 @@
             template:
                 '<div class="sap-apps-tile panel panel-default">' +
                     '<h3 class="sap-apps-tile-header">' +
-                        '{{tile.title}}' +
+                        '<span class="sap-apps-tile-header-title">{{tile.title}}<span>' +
                         '<small class="sap-apps-tile-header-subtitle">{{tile.subtitle}}</small>' +
                     '</h3>' +
                     '<div class="sap-apps-tile-content">' +

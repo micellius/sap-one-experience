@@ -36,10 +36,23 @@
       height: 3.5*@rem;
       font-size: 1*@rem;
       margin: 0;
+      .sap-apps-tile-header-title {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        word-wrap: break-word;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        line-height: 1.125*@rem;
+        max-height: 2.25*@rem;
+      }
       .sap-apps-tile-header-subtitle {
         display: block;
         font-size: 0.875*@rem;
         color: @headings-small-color;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
     }
@@ -55,9 +68,13 @@
     }
     .sap-apps-tile-footer {
       height: 1*@rem;
+      line-height: 1*@rem;
       font-size: 0.875*@rem;
       color: @headings-small-color;
       text-align: right;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
