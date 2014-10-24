@@ -1,7 +1,46 @@
+@sap-documents-list-row-height: @font-size-base*4.857142857142857;
+
 .sap-documents {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+
+  .sap-documents-list-row {
+    height: @sap-documents-list-row-height;
+    border-bottom: 1px solid @table-border-color;
+  }
+  .sap-documents-list-check {
+    width: @font-size-base*3.4285714285714284;
+    text-align: center;
+  }
+  .sap-documents-list-type {
+    width: @font-size-base*3.5714285714285716;
+    text-align: left;
+  }
+  .sap-documents-list-row > div {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .sap-documents-list-row {
+    &:hover {
+      background-color: @table-bg-accent;
+    }
+    .sap-documents-list-check {
+      font-size: @font-size-base*1.4285714285714286;
+      line-height: @sap-documents-list-row-height;
+      height: @sap-documents-list-row-height;
+    }
+    .sap-documents-list-type {
+      font-size: @font-size-base*2.5;
+      line-height: @sap-documents-list-row-height;
+      height: @sap-documents-list-row-height;
+    }
+    .sap-documents-list-main {
+      min-width: 350px;
+    }
+    .sap-documents-list-size {
+    }
+  }
 }

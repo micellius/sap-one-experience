@@ -79,7 +79,15 @@
                         "gallerySwitch": "Galley",
                         "notificationsSwitch": "Notifications",
                         "homeGalleryTitle": "Widgets",
-                        "appsGalleryTitle": "Applications"
+                        "appsGalleryTitle": "Applications",
+                        "dataset": "Dataset",
+                        "story": "Story",
+                        "report": "Report",
+                        "shared": "Shared",
+                        "submitted": "Submitted",
+                        "changedOn": "Changed On",
+                        "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                        "dateFormat": "M d, Y H:m:S"
                     }
                 },
                 "ru": {
@@ -111,7 +119,15 @@
                         "gallerySwitch": "Галлерея",
                         "notificationsSwitch": "Уведомления",
                         "homeGalleryTitle": "Виджеты",
-                        "appsGalleryTitle": "Приложения"
+                        "appsGalleryTitle": "Приложения",
+                        "dataset": "Данные",
+                        "story": "История",
+                        "report": "Отчет",
+                        "shared": "Коллективный",
+                        "submitted": "Опубликованный",
+                        "changedOn": "Изменено",
+                        "months": ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"],
+                        "dateFormat": "d M Y H:m:S"
                     }
                 }
             };

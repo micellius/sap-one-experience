@@ -4,4 +4,46 @@
   left: 0;
   right: 0;
   bottom: 0;
+  background-color: @well-bg;
+  padding: @grid-gutter-width @grid-gutter-width/2 @grid-gutter-width @grid-gutter-width/2;
+  overflow: auto;
+
+  .sap-notifications-item {
+    .panel-body {
+      position: relative;
+      white-space: nowrap;
+    }
+    .panel-footer {
+      text-align: right;
+      button {
+        margin-right: @panel-body-padding/2;
+      }
+      button:last-child {
+        margin-right: 0em;
+      }
+    }
+  }
+
+  .sap-notifications-item-avatar {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    border: 2px solid white;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 3px 0px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    vertical-align: top;
+  }
+
+  .sap-notifications-item-text {
+    display: inline-block;
+    white-space: normal;
+    vertical-align: top;
+    width: calc(100% - @panel-body-padding);
+    margin-left: @panel-body-padding;
+    small {
+      color: @headings-small-color;
+    }
+  }
 }

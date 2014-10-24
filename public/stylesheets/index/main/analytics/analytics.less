@@ -1,7 +1,93 @@
+@sap-analytics-list-header-height: @font-size-small*1.6666666666666667;
+@sap-analytics-list-row-height: @font-size-base*3.7142857142857144;
+
 .sap-analytics {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+
+  .sap-analytics-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .sap-analytics-list-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: @panel-default-heading-bg;
+    font-size: @font-size-small*0.9166666666666666;
+    line-height: @sap-analytics-list-header-height;
+    height: @sap-analytics-list-header-height;
+    border-top: 1px solid @panel-default-border;
+    border-bottom: 1px solid @panel-default-border;
+    box-shadow: 0 2px 2px -1px rgba(0,0,0,0.1);
+    color: @gray;
+    font-weight: bold;
+    text-shadow: 0 1px @component-active-color;
+  }
+  .sap-analytics-list-body {
+    position: absolute;
+    top: @sap-analytics-list-header-height;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+  }
+  .sap-analytics-list-row {
+    height: @sap-analytics-list-row-height;
+    border-bottom: 1px solid @table-border-color;
+    cursor: pointer;
+  }
+  .sap-analytics-list-header > div,
+  .sap-analytics-list-row > div {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .sap-analytics-list-type {
+    width: 45px;
+    font-size: @font-size-base*1.7857142857142858;
+    text-align: center;
+  }
+  .sap-analytics-list-name {
+    width: 55%;
+  }
+  .sap-analytics-list-owner {
+    width: calc(~"45% - 290px");
+  }
+  .sap-analytics-list-modified {
+    width: 208px;
+  }
+  .sap-analytics-list-action {
+    width: 37px;
+    font-size: @font-size-base*1.1428571428571428;
+    text-align: center;
+  }
+  .sap-analytics-list-row {
+    &:hover {
+      background-color: @table-bg-accent;
+    }
+    .sap-analytics-list-type {
+      line-height: @sap-analytics-list-row-height;
+      height: @sap-analytics-list-row-height;
+    }
+    .sap-analytics-list-name-text {
+      font-weight: bold;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .sap-analytics-list-name-tags {
+      margin: 0;
+      padding: 0;
+      .label {
+        margin-right: 0.5em;
+      }
+    }
+  }
 }

@@ -66,12 +66,17 @@ exports.get = function(req, res){
             '/javascripts/index/main/notifications/notifications-module.js',
             '/javascripts/index/main/notifications/controllers/notifications-controller.js',
             '/javascripts/index/main/notifications/services/notifications-feed-service.js',
+            '/javascripts/index/main/notifications/directives/notifications-item-directive.js',
             // Analytics
             '/javascripts/index/main/analytics/analytics-module.js',
             '/javascripts/index/main/analytics/controllers/analytics-controller.js',
+            '/javascripts/index/main/analytics/services/analytics-feed-service.js',
+            '/javascripts/index/main/analytics/directives/analytics-list-directive.js',
             // Documents
             '/javascripts/index/main/documents/documents-module.js',
             '/javascripts/index/main/documents/controllers/documents-controller.js',
+            '/javascripts/index/main/documents/services/documents-feed-service.js',
+            '/javascripts/index/main/documents/directives/documents-list-directive.js',
             // Main
             '/javascripts/index/main/main-module.js',
             '/javascripts/index/main/controllers/main-controller.js',

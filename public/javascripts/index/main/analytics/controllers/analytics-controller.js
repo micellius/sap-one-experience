@@ -4,14 +4,20 @@
 (function () {
     'use strict';
 
-    function sapAnalyticsController(sapSharedGalleryService) {
+    function sapAnalyticsController($scope, sapSharedGalleryService, sapAnalyticsFeedService) {
         sapSharedGalleryService.setItems([]);
+
+        sapAnalyticsFeedService.promise.success(function () {
+            $scope.items = sapAnalyticsFeedService.getReports();
+        });
     }
 
     angular.
         module('sapAnalytics').
         controller('sapAnalyticsController', [
+            '$scope',
             'sapSharedGalleryService',
+            'sapAnalyticsFeedService',
             sapAnalyticsController
         ]);
 }());

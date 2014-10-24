@@ -4,14 +4,17 @@
 (function () {
     'use strict';
 
-    function sapNotificationsController(sapSharedGalleryService) {
+    function sapNotificationsController($scope, sapSharedGalleryService, sapNotificationsFeedService) {
         sapSharedGalleryService.setItems([]);
+        $scope.items = sapNotificationsFeedService.getNotifications();
     }
 
     angular.
         module('sapNotifications').
         controller('sapNotificationsController', [
+            '$scope',
             'sapSharedGalleryService',
+            'sapNotificationsFeedService',
             sapNotificationsController
         ]);
 }());

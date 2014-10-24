@@ -6,9 +6,86 @@ var mock = {},
     list;
 
 list = [{
-    title: 'Report 1'
+    type: 'dataset',
+    title: 'Lorem ipsum dolor sit amet',
+    owner: 'John Doe',
+    modified: {
+        by: 'John Doe',
+        at: Date.now() - 3*86400000 // 3 days ago
+    },
+    tags: ['shared', 'submitted']
 }, {
-    title: 'Report 2'
+    type: 'story',
+    title: 'Duis viverra viverra massa nec malesuada',
+    owner: 'Jane Doe',
+    modified: {
+        by: 'John Doe',
+        at: Date.now() - 2*86400000 // 2 days ago
+    },
+    tags: ['shared', 'submitted']
+}, {
+    type: 'report',
+    title: 'Quisque vel lorem',
+    owner: 'John Doe',
+    modified: {
+        by: 'John Doe',
+        at: Date.now() - 5*86400000 // 5 days ago
+    },
+    tags: ['shared', 'submitted']
+}, {
+    type: 'dataset',
+    title: 'Lorem ipsum dolor sit amet',
+    owner: 'John Doe',
+    modified: {
+        by: 'John Doe',
+        at: Date.now() - 3*86400000 // 3 days ago
+    },
+    tags: ['shared', 'submitted']
+}, {
+    type: 'story',
+    title: 'Duis viverra viverra massa nec malesuada',
+    owner: 'Jane Doe',
+    modified: {
+        by: 'John Doe',
+        at: Date.now() - 2*86400000 // 2 days ago
+    },
+    tags: ['shared', 'submitted']
+}, {
+    type: 'report',
+    title: 'Quisque vel lorem',
+    owner: 'John Doe',
+    modified: {
+        by: 'John Doe',
+        at: Date.now() - 5*86400000 // 5 days ago
+    },
+    tags: ['shared', 'submitted']
+}, {
+    type: 'dataset',
+    title: 'Lorem ipsum dolor sit amet',
+    owner: 'John Doe',
+    modified: {
+        by: 'John Doe',
+        at: Date.now() - 3*86400000 // 3 days ago
+    },
+    tags: ['shared', 'submitted']
+}, {
+    type: 'story',
+    title: 'Duis viverra viverra massa nec malesuada',
+    owner: 'Jane Doe',
+    modified: {
+        by: 'John Doe',
+        at: Date.now() - 2*86400000 // 2 days ago
+    },
+    tags: ['shared', 'submitted']
+}, {
+    type: 'report',
+    title: 'Quisque vel lorem',
+    owner: 'John Doe',
+    modified: {
+        by: 'John Doe',
+        at: Date.now() - 5*86400000 // 5 days ago
+    },
+    tags: ['shared', 'submitted']
 }];
 
 mock.getReports = function (req, res) {
