@@ -22,11 +22,13 @@
             var bootstrappedUser,
                 user,
                 isAuth,
+                redirectPath,
                 sapSharedAuthenticationService;
 
             bootstrappedUser = sapSharedBootstrapService.get('user');
             user = bootstrappedUser || {};
             isAuth = !!bootstrappedUser;
+            redirectPath = '';
 
             function isAuthenticated() {
                 return isAuth;
@@ -43,7 +45,7 @@
                 }).success(function (data) {
                     isAuth = true;
                     angular.extend(user, data.results);
-                    $location.path(defaultPath);
+                    $location.path(redirectPath || defaultPath);
                 });
             }
 
@@ -56,12 +58,18 @@
                         }
                     }
                     isAuth = false;
+                    redirectPath = '';
                     $location.path(loginPath);
                 });
             }
 
+            function setRedirectPath(path) {
+                redirectPath = path;
+            }
+
             sapSharedAuthenticationService = {
                 isAuthenticated: isAuthenticated,
+                setRedirectPath: setRedirectPath,
                 getUser: getUser,
                 login: login,
                 logout: logout

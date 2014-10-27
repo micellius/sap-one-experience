@@ -18,6 +18,7 @@
     function run($rootScope, $location, sapSharedAuthenticationService) {
         $rootScope.$on('$locationChangeStart', function () {
             if ($location.path() !== SAP_LOGIN_PATH && !sapSharedAuthenticationService.isAuthenticated()) {
+                sapSharedAuthenticationService.setRedirectPath($location.path());
                 $location.path(SAP_LOGIN_PATH);
             }
         });
