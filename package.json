@@ -22,7 +22,7 @@
     "less-middleware": "~1.0.4",
     "locale": "~0.0.20",
     "morgan": "~1.4.1",
-    "request": "~2.46.0",
+    "request": "~2.47.0",
     "serve-favicon": "~2.1.6",
     "stdio": "~0.2.3",
     "xml2js": "~0.4.4"
