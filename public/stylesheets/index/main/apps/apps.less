@@ -12,7 +12,10 @@
   background-position: left center;
   background-attachment: fixed;
   overflow: auto;
-  padding: 0 2*@rem;
+
+  &.sap-apps-groups {
+    padding: 0 2*@rem;
+  }
 
   .sap-apps-group {
     margin: 3*@rem auto 0 auto;
@@ -75,6 +78,238 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+
+  /***************/
+  /* Application */
+  /***************/
+
+  .sap-app-master-details {
+    @sap-app-master-width: 20*@rem;
+    @sap-app-toolbar-padding: @navbar-height/12;
+    .panel {
+      margin: 0;
+      border: none;
+      border-radius: 0;
+    }
+    .sap-app-header {
+      height: @navbar-height;
+      line-height: @navbar-height;
+      padding: 0;
+      font-size: 1*@rem;
+      text-align: center;
+    }
+    .sap-app-toolbar {
+      height: @navbar-height;
+      background: @navbar-default-bg;
+      padding: @sap-app-toolbar-padding;
+      border-bottom: 1px solid @panel-default-border;
+      .sap-app-toolbar-search {
+        width: @sap-app-master-width - @sap-app-toolbar-padding*2 - 2px;
+        height: @navbar-height - @sap-app-toolbar-padding*2 - 2px;
+        border: 1px solid @panel-default-border;
+        padding-left: 1*@rem;
+        -webkit-appearance: none;
+        outline: none;
+        -webkit-transition: border 500ms ease-out;
+        &::-webkit-input-placeholder {
+          font-style: italic;
+        }
+        &:hover, &:focus {
+          border-color: @component-active-bg;
+        }
+      }
+    }
+    .sap-app-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: @navbar-height;
+      line-height: @navbar-height;
+      font-size: 1*@rem;
+      background-color: @navbar-inverse-bg;
+      color: @navbar-inverse-color;
+      text-align: right;
+      .sap-app-footer-button {
+        display: inline-block;
+        width: @navbar-height;
+        height: @navbar-height;
+        line-height: @navbar-height;
+        text-align: center;
+        color: @navbar-inverse-link-color;
+        font-size: x-large;
+        cursor: pointer;
+        &:hover {
+          color: @navbar-inverse-link-hover-color;
+          background: @navbar-inverse-link-hover-bg;
+        }
+      }
+    }
+    .sap-app-master {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: @sap-app-master-width;
+      border-right: 1px solid @panel-default-border;
+      .sap-app-header {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid @panel-default-border;
+      }
+      .sap-app-master-list {
+        position: absolute;
+        top: 2*@navbar-height;
+        left: 0;
+        right: 0;
+        bottom: @navbar-height;
+        overflow-x: hidden;
+        overflow-y: auto;
+        .sap-app-master-list-item {
+          padding-left: 1*@rem + @sap-app-toolbar-padding;
+          cursor: pointer;
+          height: (@font-size-h3 + @font-size-h6) * @line-height-base + 2*@padding-large-vertical;
+          &:hover {
+            background-color: @list-group-hover-bg;
+          }
+          &.sap-active {
+            color: @list-group-active-color;
+            background-color: @list-group-active-bg;
+          }
+          .sap-app-master-list-item-start {
+            display: inline-block;
+            font-size: @font-size-large;
+          }
+          .sap-app-master-list-item-end {
+            position: absolute;
+            display: inline-block;
+            top: @padding-large-vertical;
+            right: @padding-large-horizontal;
+            text-align: right;
+          }
+          .sap-app-master-list-item-large {
+            font-size: @font-size-h3;
+          }
+          .sap-app-master-list-item-small {
+            font-size: @font-size-h6;
+          }
+        }
+      }
+    }
+    .sap-app-details {
+      position: absolute;
+      top: 0;
+      left: @sap-app-master-width;
+      bottom: 0;
+      right: 0;
+      .sap-app-header {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid @panel-default-border;
+      }
+      .sap-app-details-container {
+        position: absolute;
+        top: @navbar-height;
+        left: 0;
+        right: 0;
+        bottom: @navbar-height;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background-image: linear-gradient(rgba(223, 242, 243, 0.5) 0px, rgba(220, 236, 240, 0.5) 50%, rgba(221, 228, 235, 0.5) 100%);
+        .sap-app-details-header {
+          margin: 1*@rem;
+          padding: 1*@rem;
+          .sap-app-details-header-top {
+            clear: both;
+            height: (@font-size-h2 + @font-size-h6) * @line-height-base;
+            .sap-app-details-header-top-title {
+              float: left;
+              font-size: @font-size-h3;
+            }
+            .sap-app-details-header-top-number {
+              float: right;
+              text-align: right;
+              .sap-app-details-header-top-number-price {
+                font-size: @font-size-h2;
+              }
+              .sap-app-details-header-top-number-currency {
+                font-size: @font-size-h6;
+              }
+            }
+          }
+        }
+        .sap-app-details-tabs {
+          margin: 1*@rem 1*@rem 0 1*@rem;
+          padding: 1*@rem 1*@rem 0 1*@rem;
+          .sap-app-details-tab {
+            @sap-app-details-tab-size: @font-size-base * 5.714285714285714; // ~80px
+            display: inline-block;
+            vertical-align: top;
+            width: @sap-app-details-tab-size;
+            height: @sap-app-details-tab-size;
+            text-align: center;
+            .sap-app-details-tab-icon {
+              display: inline-block;
+              @sap-app-details-tab-icon-size: @font-size-base * 3.4285714285714284; // ~48px
+              width: @sap-app-details-tab-icon-size;
+              height: @sap-app-details-tab-icon-size;
+              background: @component-active-color;
+              color: @component-active-bg;
+              border: 1px solid @component-active-bg;
+              border-radius: @sap-app-details-tab-icon-size;
+              text-align: center;
+              .glyphicon {
+                font-size: @font-size-h3;
+                line-height: @font-size-base * 3.142857142857143; // ~44px
+              }
+            }
+            &.sap-active {
+              border-bottom: 4px solid @component-active-bg;
+              .sap-app-details-tab-icon {
+                background: @component-active-bg;
+                color: @component-active-color;
+              }
+
+            }
+            .sap-app-details-tab-icon-text {
+              font-size: @font-size-h6;
+              margin-top: 0.5em;
+            }
+          }
+        }
+        .sap-app-details-tab-panel {
+          border-radius: 0;
+          padding: 0 2*@rem 2*@rem 2*@rem;
+          border-top: 1px solid @panel-default-border;
+          border-bottom: 1px solid @panel-default-border;
+          .sap-app-details-tab-panel-header {
+            padding-left: 1*@rem;
+            border-bottom: 1px solid @panel-default-border;
+            font-size: @font-size-base * 1.1428571428571428; // ~16px;
+            line-height: @font-size-base * 3.4285714285714284; // ~48px;
+          }
+          .sap-app-details-tab-panel-body {
+            padding: 1*@rem;
+            .sap-app-details-tab-panel-field-label {
+              display: inline-block;
+              padding-right: 1em;
+              text-align: right;
+              vertical-align: middle;
+              width: 30%;
+              color: @text-muted;
+            }
+            .sap-app-details-tab-panel-field-value {
+              display: inline-block;
+              vertical-align: middle;
+              width: 70%;
+            }
+          }
+        }
+      }
     }
   }
 }

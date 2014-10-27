@@ -5,6 +5,6 @@
     'use strict';
 
     angular.
-        module('sapApps', ['sapShared']);
+        module('sapApps', ['sapShared', 'sapG1t1']);
 
 }());

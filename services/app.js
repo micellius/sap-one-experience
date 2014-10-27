@@ -90,11 +90,11 @@ mock.getGroups = function(req, res) {
             tiles: [{
                 id: 'g1t1',
                 type: -1,
-                title: 'Static Tile',
-                subtitle: 'Subtitle',
-                info: 'Info',
-                number: '000',
-                icon: 'cog'
+                title: 'Shopping Cart',
+                subtitle: 'Finding & ordering products',
+                info: 'products',
+                number: '9',
+                icon: 'shopping-cart'
             }, {
                 id: 'g1t2',
                 type: -1,

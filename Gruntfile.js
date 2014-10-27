@@ -37,6 +37,9 @@ module.exports = function(grunt) {
                         // Home
                         'public/javascripts/index/main/home/home-module.js',
                         'public/javascripts/index/main/home/**/home-*.js',
+                        // G1t1
+                        'public/javascripts/index/main/apps/g1t1/g1t1-module.js',
+                        'public/javascripts/index/main/apps/g1t1/**/g1t1-*.js',
                         // Apps
                         'public/javascripts/index/main/apps/apps-module.js',
                         'public/javascripts/index/main/apps/**/apps-*.js',

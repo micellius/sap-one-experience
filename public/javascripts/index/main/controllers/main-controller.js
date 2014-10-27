@@ -24,8 +24,12 @@
             $scope.msg = sapSharedI18nService.getMessages('main');
         });
 
+        $scope.$on('closePanels', function () {
+            $scope.sidebarMode = 'toggle';
+        });
+
         this.toggleSideBar = function () {
-            $scope.sidebarMode = ($scope.sidebarMode === 'toggle' ? '' : 'toggle');
+            $scope.sidebarMode = ($scope.sidebarMode ? '' : 'toggle');
         };
 
         this.toggleUserPopover = function () {

@@ -8,7 +8,7 @@
 
         var groups = [];
 
-        $http({
+        this.promise = $http({
             method: 'GET',
             url: 'api/apps/groups'
         }).success(function (data) {

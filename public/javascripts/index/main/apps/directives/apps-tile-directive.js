@@ -4,10 +4,10 @@
 (function () {
     'use strict';
 
-    function sapAppsTileDirective() {
+    function sapAppsTileDirective($location) {
         return {
             template:
-                '<div class="sap-apps-tile panel panel-default">' +
+                '<div class="sap-apps-tile panel panel-default" ng-click="open()">' +
                     '<h3 class="sap-apps-tile-header">' +
                         '<span class="sap-apps-tile-header-title">{{tile.title}}<span>' +
                         '<small class="sap-apps-tile-header-subtitle">{{tile.subtitle}}</small>' +
@@ -20,6 +20,11 @@
             replace: true,
             scope: {
                 tile: '=sapAppsTileDirective'
+            },
+            link: function (scope) {
+                scope.open = function () {
+                    $location.search('id', scope.tile.id);
+                };
             }
         };
     }
@@ -27,6 +32,7 @@
     angular.
         module('sapApps').
         directive('sapAppsTileDirective', [
+            '$location',
             sapAppsTileDirective
         ]);
 

@@ -51,12 +51,17 @@ exports.get = function(req, res){
             '/javascripts/index/main/home/services/home-widgets-service.js',
             '/javascripts/index/main/home/services/home-layout-service.js',
             '/javascripts/index/main/home/directives/home-widget-directive.js',
+            // G1t1
+            '/javascripts/index/main/apps/g1t1/g1t1-module.js',
+            '/javascripts/index/main/apps/g1t1/services/g1t1-feed-service.js',
+            '/javascripts/index/main/apps/g1t1/directives/g1t1-app-directive.js',
             // Apps
             '/javascripts/index/main/apps/apps-module.js',
             '/javascripts/index/main/apps/controllers/apps-controller.js',
             '/javascripts/index/main/apps/services/apps-groups-service.js',
             '/javascripts/index/main/apps/directives/apps-group-directive.js',
             '/javascripts/index/main/apps/directives/apps-tile-directive.js',
+            '/javascripts/index/main/apps/directives/apps-app-directive.js',
             // Todos
             '/javascripts/index/main/todos/todos-module.js',
             '/javascripts/index/main/todos/controllers/todos-controller.js',
