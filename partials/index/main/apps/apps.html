@@ -1,5 +1,6 @@
-<div class="sap-apps" ng-controller="sapAppsController">
-    <div sap-apps-group-directive="group" ng-repeat="group in groups">
+<div ng-class="{'sap-apps':true, 'sap-apps-groups':groups, 'sap-apps-app':app}" ng-controller="sapAppsController">
+    <div sap-apps-group-directive="group" ng-repeat="group in groups" ng-if="groups">
         <div sap-apps-tile-directive="tile" ng-repeat="tile in group.tiles"></div>
     </div>
+    <div sap-apps-app-directive="app" ng-if="app"></div>
 </div>
